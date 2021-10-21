@@ -30,26 +30,23 @@ $vendedores = $vendedorModel->listar();
             <a class="navbar-brand" style="margin-left: 10px;"><strong>Loja variedades</strong></a>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Active</a>
+                    <a class="nav-link active" href="#">Página Inicial</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="vendedor.php">Vendedores</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
+                    <a class="nav-link" href="produtos.php">Produtos</a>
                 </li>
             </ul>
         </nav>
     </header>
 
-    <table class="table table-bordered">
+    <table class="table table-bordered" style="margin-top: 10px;">
         <thead>
             <tr>
                 <th colspan=4>
-                    <h4 class="text-center">Vendedor</h4>
+                    <h4 class="text-center">Lista de vendedor</h4>
                 </th>
             </tr>
             <tr>

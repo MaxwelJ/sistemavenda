@@ -1,10 +1,9 @@
 function abrirModalEdit(id) {
     $("#nome-edit").val('')
-    $("#cpf-edit").val('')
-    $("#data-nasc-edit").val('')
+    $("#quantidade-edit").val('')
 
     $.ajax({
-        url: 'backend/vendedor/vendedor.php',
+        url: 'backend/produtos/produtos.php',
         type: 'get',
         dataType: 'json',
         data: {
@@ -14,15 +13,13 @@ function abrirModalEdit(id) {
             console.log(data);
             $("#id-edit").val(data.id)
             $("#nome-edit").val(data.nome)
-            $("#cpf-edit").val(data.cpf)
-            $("#data-nasc-edit").val(data.data_nasc)
+            $("#quantidade-edit").val(data.quantidade)
         },
         error: function () {
             alert("Deu erro ao salvar.")
         }
     })
-    $("#cpf-edit").mask("000.000.000-00")
-    $('#modal_vendedor_edit').modal("show")
+    $('#modal_produtos_edit').modal("show")
 }
 
 $(function () {
@@ -48,7 +45,7 @@ function salvar(tipo) {
     }
 
     $.ajax({
-        url: 'backend/vendedor/salvar.php',
+        url: 'backend/produtos/salvar.php',
         type: 'post',
         dataType: 'json',
         data: form,
@@ -66,19 +63,16 @@ function salvar(tipo) {
 
 function abrirModalCreate() {
     $("#nome-create").val('')
-    $("#cpf-create").val('')
-    $("#cpf-create").mask("000.000.000-00")
-    $("#data-nasc-create").val('')
-    $('#modal_vendedor_create').modal("show")
+    $("#quantidade-create").val('')
+    $('#modal_produtos_create').modal("show")
 }
 
 function abrirModalView(id) {
     $("#nome-view").val('')
-    $("#cpf-view").val('')
-    $("#data-nasc-view").val('')
+    $("#quantidade-view").val('')
 
     $.ajax({
-        url: 'backend/vendedor/vendedor.php/',
+        url: 'backend/produtos/produtos.php/',
         type: 'get',
         dataType: 'json',
         data: {
@@ -88,25 +82,21 @@ function abrirModalView(id) {
             console.log(data);
             $("#id-view").val(data.id)
             $("#nome-view").val(data.nome)
-            $("#cpf-view").val(data.cpf)
-            $("#data-nasc-view").val(data.data_nasc)
+            $("#quantidade-view").val(data.quantidade)
         },
         error: function () {
             alert("Deu erro ao salvar.")
         }
     })
 
-    $("#cpf-view").mask("000.000.000-00")
-    $('#modal_vendedor_view').modal("show")
+    $('#modal_produtos_view').modal("show")
 }
 
 
 
 function apagar(id) {
     if (confirm('Deseja realmente apagar esse cadastro?')) {
-
-
-        $.getJSON("backend/vendedor/apagar.php", {
+        $.getJSON("backend/produtos/apagar.php", {
             id: id
         }, function (data) {
             if (data.status == true) {
