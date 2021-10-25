@@ -48,13 +48,14 @@ $produtos = $produtosModel->listar();
     <table class="table table-bordered" style="margin-top: 10px;">
         <thead>
             <tr>
-                <th colspan=4>
+                <th colspan=5>
                     <h4 class="text-center">Lista de produtos</h4>
                 </th>
             </tr>
             <tr>
                 <th style="background-color: #e3f2fd;">N° do produto</th>
                 <th style="background-color: #e3f2fd;">Nome</th>
+                <th style="background-color: #e3f2fd;">Preço</th>
                 <th style="background-color: #e3f2fd;">Quantidade</th>
                 <th style="background-color: #e3f2fd;">Ações</th>
             </tr>
@@ -64,6 +65,7 @@ $produtos = $produtosModel->listar();
                 <tr>
                     <td><?= $produtos['id'] ?></td>
                     <td><?= $produtos['nome'] ?></td>
+                    <td class='qaunt'>R$ <?= $produtos['preco'] ?></td>
                     <td class='qaunt'><?= $produtos['quantidade'] ?></td>
                     <td>
                         <div>
@@ -91,9 +93,13 @@ $produtos = $produtosModel->listar();
                         <div class="col-md-12">
                             <div class="row">
                                 <input type="hidden" id="id-edit" name="id">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <label for="nome-edit">Nome: </label>
                                     <input type="text" id="nome-edit" name="nome" class="form-control" required />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="preco-edit">Preço: </label>
+                                    <input type="text" id="preco-edit" name="preco" class="form-control" required />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="quantidade-edit">Quantidade: </label>
@@ -125,9 +131,13 @@ $produtos = $produtosModel->listar();
                         <div class="col-md-12">
                             <div class="row">
                                 <input type="hidden" id="id-view" name="id">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <label for="nome-view">Nome: </label>
                                     <input type="text" id="nome-view" name="nome" class="form-control" disabled />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="preco-view">Preço: </label>
+                                    <input type="text" id="preco-view" name="preco" class="form-control" disabled />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="quantidade-view">Quantidade: </label>
@@ -162,9 +172,13 @@ $produtos = $produtosModel->listar();
                     <div class="modal-body">
                         <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <label for="nome-create">Nome: </label>
                                     <input type="text" id="nome-create" name="nome" class="form-control" required />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="preco-create">Preço: </label>
+                                    <input type="text" id="preco-create" name="preco" class="form-control" required />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="quantidade-create">Quantidade: </label>

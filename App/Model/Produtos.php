@@ -41,7 +41,8 @@ class Produtos
                 update produtos
                 set 
                     nome='{$dados['nome']}',
-                    quantidade='{$dados['quantidade']}'
+                    quantidade='{$dados['quantidade']}',
+                    preco='{$dados['preco']}'
                 where id={$dados['id']}
             ";
         }
@@ -49,7 +50,7 @@ class Produtos
         else {
             $sql = "
                 insert into produtos (nome, quantidade)
-                values ('{$dados['nome']}', '{$dados['quantidade']}')
+                values ('{$dados['nome']}', '{$dados['preco']}', '{$dados['quantidade']}')
             ";
         }
 

@@ -1,5 +1,6 @@
 function abrirModalEdit(id) {
     $("#nome-edit").val('')
+    $("#preco-edit").val('')
     $("#quantidade-edit").val('')
 
     $.ajax({
@@ -13,12 +14,14 @@ function abrirModalEdit(id) {
             console.log(data);
             $("#id-edit").val(data.id)
             $("#nome-edit").val(data.nome)
+            $("#preco-edit").val(data.preco)
             $("#quantidade-edit").val(data.quantidade)
         },
         error: function () {
             alert("Deu erro ao salvar.")
         }
     })
+    $('#preco-edit').mask('#.##0,00', {reverse: true});
     $('#modal_produtos_edit').modal("show")
 }
 
@@ -63,12 +66,15 @@ function salvar(tipo) {
 
 function abrirModalCreate() {
     $("#nome-create").val('')
+    $("#preco-create").val('')
+    $('#preco-create').mask('#.##0,00', {reverse: true});
     $("#quantidade-create").val('')
     $('#modal_produtos_create').modal("show")
 }
 
 function abrirModalView(id) {
     $("#nome-view").val('')
+    $("#preco-view").val('')
     $("#quantidade-view").val('')
 
     $.ajax({
@@ -82,13 +88,14 @@ function abrirModalView(id) {
             console.log(data);
             $("#id-view").val(data.id)
             $("#nome-view").val(data.nome)
+            $("#preco-view").val(data.preco)
             $("#quantidade-view").val(data.quantidade)
         },
         error: function () {
             alert("Deu erro ao salvar.")
         }
     })
-
+    $('#preco-view').mask('#.##0,00', {reverse: true});
     $('#modal_produtos_view').modal("show")
 }
 
