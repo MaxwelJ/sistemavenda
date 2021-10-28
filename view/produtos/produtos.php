@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-require_once 'vendor/autoload.php';
+require_once '../../vendor/autoload.php';
 $produtosModel = new \App\Model\Produtos();
 $produtos = $produtosModel->listar();
 ?>
@@ -17,29 +17,26 @@ $produtos = $produtosModel->listar();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.11.2/jquery.mask.min.js" integrity="sha512-Y/GIYsd+LaQm6bGysIClyez2HGCIN1yrs94wUrHoRAD5RSURkqqVQEU6mM51O90hqS80ABFTGtiDpSXd2O05nw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
     <script src="https://kit.fontawesome.com/d560921102.js" crossorigin="anonymous"></script>
-    <script src="js/index.js"></script>
-    <link href="css/index.css" rel="stylesheet">
-    <script src="js/produtos.js"></script>
+    <script src="../../js/index.js"></script>
+    <link href="../../css/index.css" rel="stylesheet">
+    <script src="../../js/produtos.js"></script>
     <title>Loja Variedas</title>
 </head>
 
 <body>
 
     <header>
-        <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <nav class="navbar navbar-light">
             <a class="navbar-brand" style="margin-left: 10px;"><strong>Loja variedades</strong></a>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Página Inicial</a>
+                    <a class="nav-link active" href="../../index.php">Página Inicial</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="vendedor.php">Vendedores</a>
+                    <a class="nav-link" href="../vendedor/vendedor.php">Vendedores</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="produtos.php">Produtos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
                 </li>
             </ul>
         </nav>

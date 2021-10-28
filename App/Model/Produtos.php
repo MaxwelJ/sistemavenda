@@ -19,7 +19,7 @@ class Produtos
 
     public function listar()
     {
-        $sql = 'SELECT * FROM produtos';
+        $sql = 'SELECT * FROM produtos order by id ASC';
 
         $stmt = Conexao::getConn()->prepare($sql);
         $stmt->execute();
@@ -42,15 +42,16 @@ class Produtos
                 set 
                     nome='{$dados['nome']}',
                     quantidade='{$dados['quantidade']}',
-                    preco='{$dados['preco']}'
+                    preco='{$dados['preco']}',
+                    categoria='{$dados['categoria']}'
                 where id={$dados['id']}
             ";
-        }
+        } 
         // criar
         else {
             $sql = "
-                insert into produtos (nome, quantidade)
-                values ('{$dados['nome']}', '{$dados['preco']}', '{$dados['quantidade']}')
+                insert into produtos (nome, preco, quantidade, categoria)
+                values ('{$dados['nome']}', '{$dados['preco']}', '{$dados['quantidade']}', '{$dados['categoria']}')
             ";
         }
 

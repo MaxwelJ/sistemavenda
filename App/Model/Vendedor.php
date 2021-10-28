@@ -19,7 +19,7 @@ class Vendedor
 
     public function listar()
     {
-        $sql = 'SELECT * FROM vendedor';
+        $sql = 'SELECT * FROM vendedor order by id ASC';
 
         $stmt = Conexao::getConn()->prepare($sql);
         $stmt->execute();

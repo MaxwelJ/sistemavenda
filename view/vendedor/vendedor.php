@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-require_once 'vendor/autoload.php';
+require_once '../../vendor/autoload.php';
 $vendedorModel = new \App\Model\Vendedor();
 $vendedores = $vendedorModel->listar();
 ?>
@@ -26,17 +26,17 @@ $vendedores = $vendedorModel->listar();
 <body>
 
     <header>
-        <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <nav class="navbar navbar-light">
             <a class="navbar-brand" style="margin-left: 10px;"><strong>Loja variedades</strong></a>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Página Inicial</a>
+                    <a class="nav-link active" href="../../index.php">Página Inicial</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="vendedor.php">Vendedores</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="produtos.php">Produtos</a>
+                    <a class="nav-link" href="../produtos/produtos.php">Produtos</a>
                 </li>
             </ul>
         </nav>
@@ -45,11 +45,12 @@ $vendedores = $vendedorModel->listar();
     <table class="table table-bordered" style="margin-top: 10px;">
         <thead>
             <tr>
-                <th colspan=4>
+                <th colspan=5>
                     <h4 class="text-center">Lista de vendedor</h4>
                 </th>
             </tr>
             <tr>
+                <th style="background-color: #e3f2fd;">Cod.</th>
                 <th style="background-color: #e3f2fd;">Nome</th>
                 <th style="background-color: #e3f2fd;">Cpf</th>
                 <th style="background-color: #e3f2fd;">Data de Nascimento</th>
@@ -59,9 +60,10 @@ $vendedores = $vendedorModel->listar();
         <tbody>
             <?php foreach ($vendedores as $vendedor) : ?>
                 <tr>
+                    <td><?= $vendedor['id'] ?></td>
                     <td><?= $vendedor['nome'] ?></td>
                     <td class='cpf'><?= $vendedor['cpf'] ?></td>
-                    <td id='data_nasc' class='data'><?= $vendedor['data_nasc'] ?></td>
+                    <td class='data'><?= $vendedor['data_nasc'] ?></td>
                     <td>
                         <div>
                             <button type="button" class="btn btn-outline-warning" onClick="abrirModalEdit(<?= $vendedor['id'] ?>)"><i class="fa fa-edit"></i></button>

@@ -1,4 +1,5 @@
 function abrirModalEdit(id) {
+    $("#cpf-edit").mask("000.000.000-00")
     $("#nome-edit").val('')
     $("#cpf-edit").val('')
     $("#data-nasc-edit").val('')
@@ -21,7 +22,6 @@ function abrirModalEdit(id) {
             alert("Deu erro ao salvar.")
         }
     })
-    $("#cpf-edit").mask("000.000.000-00")
     $('#modal_vendedor_edit').modal("show")
 }
 
@@ -95,7 +95,6 @@ function abrirModalView(id) {
             alert("Deu erro ao salvar.")
         }
     })
-
     $("#cpf-view").mask("000.000.000-00")
     $('#modal_vendedor_view').modal("show")
 }
