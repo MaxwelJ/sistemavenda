@@ -5,7 +5,7 @@ function abrirModalEdit(id) {
     $("#data-nasc-edit").val('')
 
     $.ajax({
-        url: 'backend/vendedor/vendedor.php',
+        url: '../../backend/vendedor/vendedor.php',
         type: 'get',
         dataType: 'json',
         data: {
@@ -48,7 +48,7 @@ function salvar(tipo) {
     }
 
     $.ajax({
-        url: 'backend/vendedor/salvar.php',
+        url: '../../backend/vendedor/salvar.php',
         type: 'post',
         dataType: 'json',
         data: form,
@@ -78,7 +78,7 @@ function abrirModalView(id) {
     $("#data-nasc-view").val('')
 
     $.ajax({
-        url: 'backend/vendedor/vendedor.php/',
+        url: '../../backend/vendedor/vendedor.php/',
         type: 'get',
         dataType: 'json',
         data: {
@@ -105,7 +105,7 @@ function apagar(id) {
     if (confirm('Deseja realmente apagar esse cadastro?')) {
 
 
-        $.getJSON("backend/vendedor/apagar.php", {
+        $.getJSON("../../backend/vendedor/apagar.php", {
             id: id
         }, function (data) {
             if (data.status == true) {
