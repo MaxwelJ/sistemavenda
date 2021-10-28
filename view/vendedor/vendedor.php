@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-require_once 'vendor/autoload.php';
+require_once '../../vendor/autoload.php';
 $vendedorModel = new \App\Model\Vendedor();
 $vendedores = $vendedorModel->listar();
 ?>
@@ -19,116 +19,55 @@ $vendedores = $vendedorModel->listar();
     <script src="https://kit.fontawesome.com/d560921102.js" crossorigin="anonymous"></script>
     <script src="js/index.js"></script>
     <link href="css/index.css" rel="stylesheet">
-    </link>
-    <script>
-        function abrirModalEdit(id) {
-            $.getJSON("backend/vendedor/vendedor.php", {
-                id: id
-            }, function(data) {
-                console.log(data);
-                $("#id-edit").val(data.id)
-                $("#nome-edit").val(data.nome)
-                $("#cpf-edit").val(data.cpf)
-                $("#data-nasc-edit").val(data.data_nasc)
-            });
-            $("#cpf-edit").mask("000.000.000-00")
-            $('#modal_vendedor').modal("show")
-        }
-
-        function abrirModalCreate() {
-            $('#modal_vendedor_create').modal("show")
-        }
-
-        function salvar(tipo) {
-            var form = '';
-
-            if (tipo == "create") {
-                form = $("#form-cadastro-create").serialize()
-            } else if (tipo == 'edit') {
-                form = $("#form-cadastro-edit").serialize()
-            } else {
-                alert('Erro ao executar ação')
-            }
-            $.ajax({
-                url: 'backend/vendedor/salvar.php',
-                type: 'post',
-                dataType: 'json',
-                data: form,
-                success: function(data) {
-                    console.log(data);
-                    if (data.status == true) {
-                        location.reload();
-                    }
-                },
-                error: function() {
-                    alert("Deu erro ao salvar.")
-                }
-            })
-        }
-
-        $(function() {
-            $("#form-cadastro-edit").on('submit', function(event) {
-                event.preventDefault();
-                salvar('edit');
-            })
-            $("#form-cadastro-create").on('submit', function(event) {
-                event.preventDefault();
-                salvar('create');
-            })
-        })
-
-        function apagar(id) {
-            if (confirm('Deseja realmente apagar esse cadastro?')) {
-
-
-                $.getJSON("backend/vendedor/apagar.php", {
-                    id: id
-                }, function(data) {
-                    if (data.status == true) {
-                        alert('Apagado com sucesso!')
-                        location.reload()
-                    } else {
-                        alert('Ocorreu um erro.')
-                    }
-                });
-            }
-        }
-    </script>
+    <script src="js/vendedor.js"></script>
     <title>Loja Variedas</title>
 </head>
 
 <body>
 
     <header>
-        <hr>
-        <h1 style="text-align: center;">Loja de Variedades</h1>
-        <hr>
+        <nav class="navbar navbar-light">
+            <a class="navbar-brand" style="margin-left: 10px;"><strong>Loja variedades</strong></a>
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link active" href="../../index.php">Página Inicial</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="vendedor.php">Vendedores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../produtos/produtos.php">Produtos</a>
+                </li>
+            </ul>
+        </nav>
     </header>
 
-    <table class="table table-bordered">
+    <table class="table table-bordered" style="margin-top: 10px;">
         <thead>
             <tr>
-                <th colspan=4>
-                    <h4 class="text-center">Vendedor</h4>
+                <th colspan=5>
+                    <h4 class="text-center">Lista de vendedor</h4>
                 </th>
             </tr>
             <tr>
-                <th>Nome</th>
-                <th>Cpf</th>
-                <th>Data de Nascimento</th>
-                <th>Ações</th>
+                <th style="background-color: #e3f2fd;">Cod.</th>
+                <th style="background-color: #e3f2fd;">Nome</th>
+                <th style="background-color: #e3f2fd;">Cpf</th>
+                <th style="background-color: #e3f2fd;">Data de Nascimento</th>
+                <th style="background-color: #e3f2fd;">Ações</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($vendedores as $vendedor) : ?>
                 <tr>
+                    <td><?= $vendedor['id'] ?></td>
                     <td><?= $vendedor['nome'] ?></td>
                     <td class='cpf'><?= $vendedor['cpf'] ?></td>
-                    <td id='data_nasc' class='data'><?= $vendedor['data_nasc'] ?></td>
+                    <td class='data'><?= $vendedor['data_nasc'] ?></td>
                     <td>
                         <div>
                             <button type="button" class="btn btn-outline-warning" onClick="abrirModalEdit(<?= $vendedor['id'] ?>)"><i class="fa fa-edit"></i></button>
-                            <button type="button" class="btn btn-outline-primary"><i class="fa fa-eye"></i></button>
+                            <button type="button" class="btn btn-outline-primary" onClick="abrirModalView(<?= $vendedor['id'] ?>)"><i class="fa fa-eye"></i></button>
                             <button type="button" class="btn btn-outline-danger" onClick="apagar(<?= $vendedor['id'] ?>)"><i class="fa fa-trash"></i></button>
                         </div>
                     </td>
@@ -137,13 +76,13 @@ $vendedores = $vendedorModel->listar();
         </tbody>
     </table>
 
-    <div id="modal_vendedor" class="modal fade" tabindex="-1" role="dialog">
+    <div id="modal_vendedor_edit" class="modal fade" tabindex="-1" role="dialog">
         <form id="form-cadastro-edit" method="post">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Editar cadastro</h5>
-                        <button type="button" class="close" onClick="$('#modal_vendedor').modal('hide')" aria-label="Close">
+                        <button type="button" class="close" onClick="$('#modal_vendedor_edit').modal('hide')" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -153,22 +92,60 @@ $vendedores = $vendedorModel->listar();
                                 <input type="hidden" id="id-edit" name="id">
                                 <div class="col-md-12">
                                     <label for="nome-edit">Nome: </label>
-                                    <input type="text" id="nome-edit" name="nome" class="form-control" />
+                                    <input type="text" id="nome-edit" name="nome" class="form-control" required />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="cpf-edit">CPF: </label>
-                                    <input type="text" id="cpf-edit" name="cpf" class="form-control" />
+                                    <input type="text" id="cpf-edit" name="cpf" class="form-control" required />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="data-nasc-edit">Data de nascimento: </label>
-                                    <input type="date" id="data-nasc-edit" name="data_nasc" class="form-control" />
+                                    <input type="date" id="data-nasc-edit" name="data_nasc" class="form-control" required />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-outline-primary"><i class="fa fa-save"></i> Salvar</button>
-                        <button type="button" class="btn btn-outline-danger" onClick="$('#modal_vendedor').modal('hide')"><i class="fa fa-close"></i> Fechar</button>
+                        <button type="button" class="btn btn-outline-danger" onClick="$('#modal_vendedor_edit').modal('hide')"><i class="fa fa-close"></i> Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="modal_vendedor_view" class="modal fade" tabindex="-1" role="dialog">
+        <form id="form-cadastro-view" method="post">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Cadastro</h5>
+                        <button type="button" class="close" onClick="$('#modal_vendedor_view').modal('hide')" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <input type="hidden" id="id-view" name="id">
+                                <div class="col-md-12">
+                                    <label for="nome-view">Nome: </label>
+                                    <input type="text" id="nome-view" name="nome" class="form-control" disabled />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="cpf-view">CPF: </label>
+                                    <input type="text" id="cpf-view" name="cpf" class="form-control" disabled />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="data-nasc-view">Data de nascimento: </label>
+                                    <input type="date" id="data-nasc-view" name="data_nasc" class="form-control" disabled />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <button type="submit" class="btn btn-outline-primary"><i class="fa fa-save"></i> Salvar</button> -->
+                        <button type="button" class="btn btn-outline-danger" onClick="$('#modal_vendedor_view').modal('hide')"><i class="fa fa-close"></i> Fechar</button>
                     </div>
                 </div>
             </div>
@@ -194,15 +171,15 @@ $vendedores = $vendedorModel->listar();
                             <div class="row">
                                 <div class="col-md-12">
                                     <label for="nome-create">Nome: </label>
-                                    <input type="text" id="nome-create" name="nome" class="form-control" />
+                                    <input type="text" id="nome-create" name="nome" class="form-control" required />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="cpf-create">CPF: </label>
-                                    <input type="text" id="cpf-create" name="cpf" class="form-control" />
+                                    <input type="text" id="cpf-create" name="cpf" class="form-control" required />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="data-nasc-create">Data de nascimento: </label>
-                                    <input type="date" id="data-nasc-create" name="data_nasc" class="form-control" />
+                                    <input type="date" id="data-nasc-create" name="data_nasc" class="form-control" required />
                                 </div>
                             </div>
                         </div>

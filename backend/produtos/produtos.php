@@ -1,10 +1,11 @@
 <?php 
 
 require_once '../../vendor/autoload.php';
-use App\Model\Vendedor;
+use App\Model\Produtos;
 
-$vendedor = new Vendedor();
+
+$vendedor = new Produtos();
 // var_dump($_GET['id']);die;
-$resultado = $vendedor->getVendedor($_GET['id']);
+$resultado = $vendedor->getProdutos($_GET['id']);
 
 echo json_encode($resultado);
