@@ -4,11 +4,11 @@ namespace App\Model;
 
 include 'Conexao.php';
 
-class Vendedor
+class Produtos
 {
-    public function getVendedor($id)
+    public function getProdutos($id)
     {
-        $sql = "SELECT * FROM vendedor WHERE id={$id}";
+        $sql = "SELECT * FROM produtos WHERE id={$id}";
 
         $stmt = Conexao::getConn()->prepare($sql);
         $stmt->execute();
@@ -19,7 +19,7 @@ class Vendedor
 
     public function listar()
     {
-        $sql = 'SELECT * FROM vendedor order by id ASC';
+        $sql = 'SELECT * FROM produtos order by id ASC';
 
         $stmt = Conexao::getConn()->prepare($sql);
         $stmt->execute();
@@ -38,19 +38,20 @@ class Vendedor
         // editar
         if (isset($dados['id']) && !empty($dados['id'])) {
             $sql = "
-                update vendedor
+                update produtos
                 set 
                     nome='{$dados['nome']}',
-                    cpf='{$dados['cpf']}',
-                    data_nasc='{$dados['data_nasc']}'
+                    quantidade='{$dados['quantidade']}',
+                    preco='{$dados['preco']}',
+                    categoria='{$dados['categoria']}'
                 where id={$dados['id']}
             ";
-        }
+        } 
         // criar
         else {
             $sql = "
-                insert into vendedor (nome, cpf, data_nasc)
-                values ('{$dados['nome']}', '{$dados['cpf']}', '{$dados['data_nasc']}')
+                insert into produtos (nome, preco, quantidade, categoria)
+                values ('{$dados['nome']}', '{$dados['preco']}', '{$dados['quantidade']}', '{$dados['categoria']}')
             ";
         }
 
@@ -58,8 +59,9 @@ class Vendedor
         $stmt->execute();
     }
 
-    public function apagar($id) {
-        $sql = "delete from vendedor where id={$id}";
+    public function apagar($id)
+    {
+        $sql = "delete from produtos where id={$id}";
 
         $stmt = Conexao::getConn()->prepare($sql);
         $stmt->execute();
