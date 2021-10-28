@@ -4,7 +4,7 @@ function abrirModalEdit(id) {
     $("#quantidade-edit").val('')
 
     $.ajax({
-        url: 'backend/produtos/produtos.php',
+        url: '../../backend/produtos/produtos.php',
         type: 'get',
         dataType: 'json',
         data: {
@@ -48,7 +48,7 @@ function salvar(tipo) {
     }
 
     $.ajax({
-        url: 'backend/produtos/salvar.php',
+        url: '../../backend/produtos/salvar.php',
         type: 'post',
         dataType: 'json',
         data: form,
@@ -78,7 +78,7 @@ function abrirModalView(id) {
     $("#quantidade-view").val('')
 
     $.ajax({
-        url: 'backend/produtos/produtos.php/',
+        url: '../../backend/produtos/produtos.php/',
         type: 'get',
         dataType: 'json',
         data: {
@@ -103,7 +103,7 @@ function abrirModalView(id) {
 
 function apagar(id) {
     if (confirm('Deseja realmente apagar esse cadastro?')) {
-        $.getJSON("backend/produtos/apagar.php", {
+        $.getJSON("../../backend/produtos/apagar.php", {
             id: id
         }, function (data) {
             if (data.status == true) {
