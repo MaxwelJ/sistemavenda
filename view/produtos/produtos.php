@@ -25,56 +25,61 @@ $produtos = $produtosModel->listar();
 
 <body>
 
-    <header>
-        <nav class="navbar navbar-light">
-            <a class="navbar-brand" style="margin-left: 10px;"><strong>Loja variedades</strong></a>
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link active" href="../../index.php">Página Inicial</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../vendedor/vendedor.php">Vendedores</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="produtos.php">Produtos</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    <nav class="navbar navbar-light menu">
+        <a class="navbar-brand" style="margin-left: 10px;"><strong>Loja variedades</strong></a>
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link active" href="../../index.php">Página Inicial</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../vendedor/vendedor.php">Vendedores</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="produtos.php">Produtos</a>
+            </li>
+        </ul>
+    </nav>
 
-    <table class="table table-bordered" style="margin-top: 10px;">
-        <thead>
-            <tr>
-                <th colspan=5>
-                    <h4 class="text-center">Lista de produtos</h4>
-                </th>
-            </tr>
-            <tr>
-                <th style="background-color: #e3f2fd;">N° do produto</th>
-                <th style="background-color: #e3f2fd;">Nome</th>
-                <th style="background-color: #e3f2fd;">Preço</th>
-                <th style="background-color: #e3f2fd;">Quantidade</th>
-                <th style="background-color: #e3f2fd;">Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($produtos as $produtos) : ?>
-                <tr>
-                    <td><?= $produtos['id'] ?></td>
-                    <td><?= $produtos['nome'] ?></td>
-                    <td class='qaunt'>R$ <?= $produtos['preco'] ?></td>
-                    <td class='qaunt'><?= $produtos['quantidade'] ?></td>
-                    <td>
-                        <div>
-                            <button type="button" class="btn btn-outline-warning" onClick="abrirModalEdit(<?= $produtos['id'] ?>)"><i class="fa fa-edit"></i></button>
-                            <button type="button" class="btn btn-outline-primary" onClick="abrirModalView(<?= $produtos['id'] ?>)"><i class="fa fa-eye"></i></button>
-                            <button type="button" class="btn btn-outline-danger" onClick="apagar(<?= $produtos['id'] ?>)"><i class="fa fa-trash"></i></button>
-                        </div>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+    <div class="container conteudo">
+        <div class="table-reponsive w-100">
+            <table class="table table-bordered" style="margin-top: 10px;">
+                <thead style="background-color: #e3f2fd;">
+                    <tr>
+                        <th colspan=6>
+                            <span class="text-center" style="font-size: 1.5rem;">Lista de produtos</span>
+                            <button type="button" class="btn btn-outline-dark" style="float: right;" onClick="abrirModalCreate()"><i class="fa fa-plus"></i> Adicionar</button>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="text-center" width="5%" style="background-color: #e3f2fd;">Código</th>
+                        <th width="" style="background-color: #e3f2fd;">Nome</th>
+                        <th class="text-center" width="15%" style="background-color: #e3f2fd;">Preço</th>
+                        <th class="text-center" width="10%" style="background-color: #e3f2fd;">Quantidade</th>
+                        <th class="text-center" width="10%" style="background-color: #e3f2fd;">Categoria</th>
+                        <th class="text-center" width="15%" style="background-color: #e3f2fd;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($produtos as $produtos) : ?>
+                        <tr>
+                            <td class="text-center"><?= $produtos['id'] ?></td>
+                            <td><?= $produtos['nome'] ?></td>
+                            <td>R$ <?= $produtos['preco'] ?></td>
+                            <td class="text-center"><?= $produtos['quantidade'] ?></td>
+                            <td class="text-center"><?= $produtos['nome_cat'] ?></td>
+                            <td>
+                                <div class="justify-content-center d-flex">
+                                    <button type="button" class="btn btn-outline-warning mx-1" onClick="abrirModalEdit(<?= $produtos['id'] ?>)"><i class="fa fa-edit"></i></button>
+                                    <button type="button" class="btn btn-outline-primary mx-1" onClick="abrirModalView(<?= $produtos['id'] ?>)"><i class="fa fa-eye"></i></button>
+                                    <button type="button" class="btn btn-outline-danger mx-1" onClick="apagar(<?= $produtos['id'] ?>)"><i class="fa fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <div id="modal_produtos_edit" class="modal fade" tabindex="-1" role="dialog">
         <form id="form-cadastro-edit" method="post">
@@ -94,13 +99,19 @@ $produtos = $produtosModel->listar();
                                     <label for="nome-edit">Nome: </label>
                                     <input type="text" id="nome-edit" name="nome" class="form-control" required />
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="preco-edit">Preço: </label>
                                     <input type="text" id="preco-edit" name="preco" class="form-control" required />
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="quantidade-edit">Quantidade: </label>
                                     <input type="text" id="quantidade-edit" name="quantidade" class="form-control" required />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="categoria-edit">Categoria: </label> <br>
+                                    <select name="id_categoria" id="categoria-edit" class="form-select" aria-label="Default select example">
+
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -132,13 +143,17 @@ $produtos = $produtosModel->listar();
                                     <label for="nome-view">Nome: </label>
                                     <input type="text" id="nome-view" name="nome" class="form-control" disabled />
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="preco-view">Preço: </label>
                                     <input type="text" id="preco-view" name="preco" class="form-control" disabled />
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="quantidade-view">Quantidade: </label>
                                     <input type="text" id="quantidade-view" name="quantidade" class="form-control" disabled />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="categoria-edit">Categoria: </label> <br>
+                                    <input type="text" id="categoria-view" name="categoria" class="form-control" disabled />
                                 </div>
                             </div>
                         </div>
@@ -150,10 +165,6 @@ $produtos = $produtosModel->listar();
                 </div>
             </div>
         </form>
-    </div>
-
-    <div id="button-create" style="float: right; margin-right: 20px;">
-        <button type="button" class="btn btn-outline-dark" onClick="abrirModalCreate()"><i class="fa fa-plus"></i> Adicionar</button>
     </div>
 
     <div id="modal_produtos_create" class="modal fade" tabindex="-1" role="dialog">
@@ -173,13 +184,19 @@ $produtos = $produtosModel->listar();
                                     <label for="nome-create">Nome: </label>
                                     <input type="text" id="nome-create" name="nome" class="form-control" required />
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="preco-create">Preço: </label>
                                     <input type="text" id="preco-create" name="preco" class="form-control" required />
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="quantidade-create">Quantidade: </label>
                                     <input type="text" id="quantidade-create" name="quantidade" class="form-control" required />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="categoria-create">Categoria: </label> <br>
+                                    <select name="id_categoria" id="categoria-create" class="form-select" aria-label="Default select example">
+
+                                    </select>
                                 </div>
                             </div>
                         </div>

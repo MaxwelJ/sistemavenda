@@ -25,28 +25,24 @@ $produtos = $produtosModel->listar();
 
 <body>
 
-    <div class="container-fluid">
-        <header>
-            <nav class="navbar navbar-light">
-                <a class="navbar-brand" style="margin-left: 10px;">
-                    <h4><strong>Loja variedades</strong></h4>
-                </a>
-                <ul class="nav justify-content-end">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="index.php">Página Inicial</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="view/vendedor/vendedor.php">Vendedores</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="view/produtos/produtos.php">Produtos</a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-    </div>
+    <nav class="navbar navbar-light shadow-lg menu">
+        <a class="navbar-brand" style="margin-left: 10px;">
+            <h4><strong>Loja variedades</strong></h4>
+        </a>
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link active" href="index.php">Página Inicial</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="view/vendedor/vendedor.php">Vendedores</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="view/produtos/produtos.php">Produtos</a>
+            </li>
+        </ul>
+    </nav>
 
-    <div class="container-fluid">
+    <div class="container-fluid conteudo">
         <div class="row">
             <div class="col-md-12">
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -86,117 +82,117 @@ $produtos = $produtosModel->listar();
             </div>
 
             <div class="col-9">
-                    <hr>
-                    <h2 style="margin-left: 20px;">SAPATOS</h2>
-                    <br>
+                <hr>
+                <h2 style="margin-left: 20px;">SAPATOS</h2>
+                <br>
 
-                    <div class="row row-cols-1 row-cols-md-3 g-4">
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="img/cards/sapatos/tenis-fila-masculino.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="img/cards/sapatos/tenis-fila-masculino.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
 
-                                    <h5 class="card-title">Tênis Fila Rippler, Masculino</h5>
-                                    <p class="card-text">R$  </p>
-                                    <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="img/cards/sapatos/tenis-nike.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Tênis Nike Revolution 5 Masculino</h5>
-                                    <p class="card-text">R$  </p>
-                                    <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="img/cards/sapatos/nike-court-vision-low-multicolor-0.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Tênis Nike Court Vision LO</h5>
-                                    <p class="card-text">R$  </p>
-                                    <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
-                                </div>
+                                <h5 class="card-title">Tênis Fila Rippler, Masculino</h5>
+                                <p class="card-text">R$ </p>
+                                <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
                             </div>
                         </div>
                     </div>
-
-                    <hr>
-                    <h2 style="margin-left: 20px;">ROUPAS</h2>
-                    <br>
-
-                    <div class="row row-cols-1 row-cols-md-3 g-4">
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="img/cards/roupas/camisa-repelente.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Camisa Repelente de Insetos UV Masculina</h5>
-                                    <p class="card-text">R$  </p>
-                                    <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="img/cards/roupas/camisa-masculina-polo.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Camisa Masculina Polo Puma BMW MMS</h5>
-                                    <p class="card-text">R$  </p>
-                                    <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="img/cards/roupas/calca-adidas.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Calça Adidas Tiro 21 Track Masculina</h5>
-                                    <p class="card-text">R$  </p>
-                                    <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
-                                </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="img/cards/sapatos/tenis-nike.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Tênis Nike Revolution 5 Masculino</h5>
+                                <p class="card-text">R$ </p>
+                                <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
                             </div>
                         </div>
                     </div>
-
-                    <hr>
-                    <h2 style="margin-left: 20px;">ACESSÓRIOS</h2>
-                    <br>
-
-                    <div class="row row-cols-1 row-cols-md-3 g-4">
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="img/cards/acessorios/pulseira-masculina.png" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Pulseira Masculina de Couro Trançado</h5>
-                                    <p class="card-text">R$  </p>
-                                    <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="img/cards/acessorios/colar.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Colar W.Buscatti Pedra de Ágata Masculino</h5>
-                                    <p class="card-text">R$  </p>
-                                    <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="img/cards/acessorios/brinco.png" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Brinco Masculino Argolinha e Cruz Par</h5>
-                                    <p class="card-text">R$  </p>
-                                    <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
-                                </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="img/cards/sapatos/nike-court-vision-low-multicolor-0.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Tênis Nike Court Vision LO</h5>
+                                <p class="card-text">R$ </p>
+                                <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <hr>
+                <h2 style="margin-left: 20px;">ROUPAS</h2>
+                <br>
+
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="img/cards/roupas/camisa-repelente.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Camisa Repelente de Insetos UV Masculina</h5>
+                                <p class="card-text">R$ </p>
+                                <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="img/cards/roupas/camisa-masculina-polo.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Camisa Masculina Polo Puma BMW MMS</h5>
+                                <p class="card-text">R$ </p>
+                                <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="img/cards/roupas/calca-adidas.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Calça Adidas Tiro 21 Track Masculina</h5>
+                                <p class="card-text">R$ </p>
+                                <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+                <h2 style="margin-left: 20px;">ACESSÓRIOS</h2>
+                <br>
+
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="img/cards/acessorios/pulseira-masculina.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Pulseira Masculina de Couro Trançado</h5>
+                                <p class="card-text">R$ </p>
+                                <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="img/cards/acessorios/colar.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Colar W.Buscatti Pedra de Ágata Masculino</h5>
+                                <p class="card-text">R$ </p>
+                                <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="img/cards/acessorios/brinco.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Brinco Masculino Argolinha e Cruz Par</h5>
+                                <p class="card-text">R$ </p>
+                                <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -8,7 +8,15 @@ class Produtos
 {
     public function getProdutos($id)
     {
-        $sql = "SELECT * FROM produtos WHERE id={$id}";
+        $sql = 
+            "SELECT
+                p.*, 
+                c.nome as nome_cat
+            FROM produtos p
+            INNER JOIN categoria c ON p.id_categoria = c.id 
+            WHERE p.id={$id}
+            order by id ASC
+        ";
 
         $stmt = Conexao::getConn()->prepare($sql);
         $stmt->execute();
@@ -19,7 +27,14 @@ class Produtos
 
     public function listar()
     {
-        $sql = 'SELECT * FROM produtos order by id ASC';
+        $sql =
+            'SELECT
+                p.*, 
+                c.nome as nome_cat
+            FROM produtos p
+            INNER JOIN categoria c ON p.id_categoria = c.id 
+            order by id ASC
+        ';
 
         $stmt = Conexao::getConn()->prepare($sql);
         $stmt->execute();
@@ -43,15 +58,15 @@ class Produtos
                     nome='{$dados['nome']}',
                     quantidade='{$dados['quantidade']}',
                     preco='{$dados['preco']}',
-                    categoria='{$dados['categoria']}'
+                    id_categoria='{$dados['id_categoria']}'
                 where id={$dados['id']}
             ";
-        } 
+        }
         // criar
         else {
             $sql = "
-                insert into produtos (nome, preco, quantidade, categoria)
-                values ('{$dados['nome']}', '{$dados['preco']}', '{$dados['quantidade']}', '{$dados['categoria']}')
+                insert into produtos (nome, preco, quantidade, id_categoria)
+                values ('{$dados['nome']}', '{$dados['preco']}', '{$dados['quantidade']}', '{$dados['id_categoria']}')
             ";
         }
 
