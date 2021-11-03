@@ -25,56 +25,59 @@ $vendedores = $vendedorModel->listar();
 
 <body>
 
-    <header>
-        <nav class="navbar navbar-light">
-            <a class="navbar-brand" style="margin-left: 10px;"><strong>Loja variedades</strong></a>
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link active" href="../../index.php">Página Inicial</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="vendedor.php">Vendedores</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../produtos/produtos.php">Produtos</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    <nav class="navbar navbar-light menu">
+        <a class="navbar-brand" style="margin-left: 10px;"><strong>Loja variedades</strong></a>
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link active" href="../../index.php">Página Inicial</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="vendedor.php">Vendedores</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../produtos/produtos.php">Produtos</a>
+            </li>
+        </ul>
+    </nav>
 
-    <table class="table table-bordered" style="margin-top: 10px;">
-        <thead>
-            <tr>
-                <th colspan=5>
-                    <h4 class="text-center">Lista de vendedor</h4>
-                </th>
-            </tr>
-            <tr>
-                <th style="background-color: #e3f2fd;">Cod.</th>
-                <th style="background-color: #e3f2fd;">Nome</th>
-                <th style="background-color: #e3f2fd;">Cpf</th>
-                <th style="background-color: #e3f2fd;">Data de Nascimento</th>
-                <th style="background-color: #e3f2fd;">Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($vendedores as $vendedor) : ?>
-                <tr>
-                    <td><?= $vendedor['id'] ?></td>
-                    <td><?= $vendedor['nome'] ?></td>
-                    <td class='cpf'><?= $vendedor['cpf'] ?></td>
-                    <td class='data'><?= $vendedor['data_nasc'] ?></td>
-                    <td>
-                        <div>
-                            <button type="button" class="btn btn-outline-warning" onClick="abrirModalEdit(<?= $vendedor['id'] ?>)"><i class="fa fa-edit"></i></button>
-                            <button type="button" class="btn btn-outline-primary" onClick="abrirModalView(<?= $vendedor['id'] ?>)"><i class="fa fa-eye"></i></button>
-                            <button type="button" class="btn btn-outline-danger" onClick="apagar(<?= $vendedor['id'] ?>)"><i class="fa fa-trash"></i></button>
-                        </div>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+    <div class="container conteudo">
+        <div class="table-reponsive w-100">
+            <table class="table table-bordered" style="margin-top: 10px;">
+                <thead>
+                    <tr>
+                        <th colspan=5 class="bg-info text-dark">
+                            <span class="text-center" style="font-size: 1.5rem;">Lista de vendedores</span>
+                            <button type="button" class="btn btn-outline-dark" style="float: right;" onClick="abrirModalCreate()"><i class="fa fa-plus"></i> Adicionar</button>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th style="background-color: #e3f2fd;">Cod.</th>
+                        <th style="background-color: #e3f2fd;">Nome</th>
+                        <th style="background-color: #e3f2fd;">Cpf</th>
+                        <th style="background-color: #e3f2fd;">Data de Nascimento</th>
+                        <th style="background-color: #e3f2fd;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($vendedores as $vendedor) : ?>
+                        <tr>
+                            <td><?= $vendedor['id'] ?></td>
+                            <td><?= $vendedor['nome'] ?></td>
+                            <td class='cpf'><?= $vendedor['cpf'] ?></td>
+                            <td class='data'><?= $vendedor['data_nasc'] ?></td>
+                            <td>
+                                <div>
+                                    <button type="button" class="btn btn-outline-warning" onClick="abrirModalEdit(<?= $vendedor['id'] ?>)"><i class="fa fa-edit"></i></button>
+                                    <button type="button" class="btn btn-outline-primary" onClick="abrirModalView(<?= $vendedor['id'] ?>)"><i class="fa fa-eye"></i></button>
+                                    <button type="button" class="btn btn-outline-danger" onClick="apagar(<?= $vendedor['id'] ?>)"><i class="fa fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <div id="modal_vendedor_edit" class="modal fade" tabindex="-1" role="dialog">
         <form id="form-cadastro-edit" method="post">
@@ -150,10 +153,6 @@ $vendedores = $vendedorModel->listar();
                 </div>
             </div>
         </form>
-    </div>
-
-    <div id="button-create" style="float: right; margin-right: 20px;">
-        <button type="button" class="btn btn-outline-dark" onClick="abrirModalCreate()"><i class="fa fa-plus"></i> Adicionar</button>
     </div>
 
     <div id="modal_vendedor_create" class="modal fade" tabindex="-1" role="dialog">

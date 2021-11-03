@@ -1,9 +1,28 @@
-function abrirModalEdit(id) {
+async function abrirModalEdit(id) {
     $("#nome-edit").val('')
     $("#preco-edit").val('')
     $("#quantidade-edit").val('')
 
-    $.ajax({
+    await $.ajax({
+        url: '../../backend/produtos/categoria.php',
+        type: 'get',
+        dataType: 'json',
+        success: function (data) {
+            $('#categoria-edit').html('');
+
+            let html = `<option>- SELECIONE -</option>`;
+            $(data).each(function (index, categoria){ 
+                html += `<option value="${categoria.id}">${categoria.nome}</option>`
+            })
+        
+            $('#categoria-edit').append(html)
+        },
+        error: function () {
+            alert("Deu erro ao salvar.")
+        }
+    })
+
+    await $.ajax({
         url: '../../backend/produtos/produtos.php',
         type: 'get',
         dataType: 'json',
@@ -11,16 +30,17 @@ function abrirModalEdit(id) {
             id: id
         },
         success: function (data) {
-            console.log(data);
             $("#id-edit").val(data.id)
             $("#nome-edit").val(data.nome)
             $("#preco-edit").val(data.preco)
             $("#quantidade-edit").val(data.quantidade)
+            $("#categoria-edit").val(data.id_categoria)
         },
         error: function () {
             alert("Deu erro ao salvar.")
         }
     })
+
     $('#preco-edit').mask('#.##0,00', {reverse: true});
     $('#modal_produtos_edit').modal("show")
 }
@@ -67,6 +87,26 @@ function salvar(tipo) {
 function abrirModalCreate() {
     $("#nome-create").val('')
     $("#preco-create").val('')
+
+    $.ajax({
+        url: '../../backend/produtos/categoria.php',
+        type: 'get',
+        dataType: 'json',
+        success: function (data) {
+            $('#categoria-create').html('');
+
+            let html = `<option>- SELECIONE -</option>`;
+            $(data).each(function (index, categoria){ 
+                html += `<option value="${categoria.id}">${categoria.nome}</option>`
+            })
+        
+            $('#categoria-create').append(html)
+        },
+        error: function () {
+            alert("Deu erro ao salvar.")
+        }
+    })
+
     $('#preco-create').mask('#.##0,00', {reverse: true});
     $("#quantidade-create").val('')
     $('#modal_produtos_create').modal("show")
@@ -90,6 +130,7 @@ function abrirModalView(id) {
             $("#nome-view").val(data.nome)
             $("#preco-view").val(data.preco)
             $("#quantidade-view").val(data.quantidade)
+            $("#categoria-view").val(data.nome_cat)
         },
         error: function () {
             alert("Deu erro ao salvar.")
