@@ -100,18 +100,24 @@ $produtos = $produtosModel->listar();
                                     <input type="text" id="nome-edit" name="nome" class="form-control" required />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="preco-edit">Preço: </label>
+                                    <label for="preco-edit" style="margin-top: 8px;">Preço: </label>
                                     <input type="text" id="preco-edit" name="preco" class="form-control" required />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="quantidade-edit">Quantidade: </label>
+                                    <label for="quantidade-edit" style="margin-top: 8px;">Quantidade: </label>
                                     <input type="text" id="quantidade-edit" name="quantidade" class="form-control" required />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="categoria-edit">Categoria: </label> <br>
-                                    <select name="id_categoria" id="categoria-edit" class="form-select" aria-label="Default select example">
-
-                                    </select>
+                                    <label for="categoria-edit" style="margin-top: 8px;">Categoria: </label> <br>
+                                    <select id="categoria-edit" name="id_categoria" class="form-select" aria-label="Default select example"></select>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="imagem-edit" style="margin-top: 8px;">Imagem do produto: </label>
+                                    <input type="file" id="imagem-edit" name="imagem" class="form-control" required />
+                                </div>
+                                <div class="col-md-12">
+                                    <br>
+                                    <img class="img-thumbnail" id="imagem-preview-edit" src="" alt="">
                                 </div>
                             </div>
                         </div>
@@ -143,17 +149,30 @@ $produtos = $produtosModel->listar();
                                     <label for="nome-view">Nome: </label>
                                     <input type="text" id="nome-view" name="nome" class="form-control" disabled />
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-4">
-                                    <label for="preco-view">Preço: </label>
+                                    <label for="preco-view" style="margin-top: 8px;">Preço: </label>
                                     <input type="text" id="preco-view" name="preco" class="form-control" disabled />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="quantidade-view">Quantidade: </label>
+                                    <label for="quantidade-view" style="margin-top: 8px;">Quantidade: </label>
                                     <input type="text" id="quantidade-view" name="quantidade" class="form-control" disabled />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="categoria-edit">Categoria: </label> <br>
+                                    <label for="categoria-view" style="margin-top: 8px;">Categoria: </label> <br>
                                     <input type="text" id="categoria-view" name="categoria" class="form-control" disabled />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="imagem-view" style="margin-top: 8px;">Imagem do produto: </label>
+                                    <!-- <input type="file" id="imagem-view" name="imagem" class="form-control" disabled /> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <img class="img-thumbnail" id="imagem-preview-view" style="margin-top: 10px;">
                                 </div>
                             </div>
                         </div>
@@ -168,7 +187,7 @@ $produtos = $produtosModel->listar();
     </div>
 
     <div id="modal_produtos_create" class="modal fade" tabindex="-1" role="dialog">
-        <form id="form-cadastro-create" method="post">
+        <form id="form-cadastro-create" method="post" enctype='multipart/form-data'>
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -185,18 +204,20 @@ $produtos = $produtosModel->listar();
                                     <input type="text" id="nome-create" name="nome" class="form-control" required />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="preco-create">Preço: </label>
+                                    <label for="preco-create" style="margin-top: 8px;">Preço: </label>
                                     <input type="text" id="preco-create" name="preco" class="form-control" required />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="quantidade-create">Quantidade: </label>
+                                    <label for="quantidade-create" style="margin-top: 8px;">Quantidade: </label>
                                     <input type="text" id="quantidade-create" name="quantidade" class="form-control" required />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="categoria-create">Categoria: </label> <br>
-                                    <select name="id_categoria" id="categoria-create" class="form-select" aria-label="Default select example">
-
-                                    </select>
+                                    <label for="categoria-create" style="margin-top: 8px;">Categoria: </label> <br>
+                                    <select name="id_categoria" id="categoria-create" class="form-select" aria-label="Default select example"></select>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="imagem-create" style="margin-top: 8px;">Imagem do produto: </label>
+                                    <input type="file" id="imagem-create" name="imagem" class="form-control" required />
                                 </div>
                             </div>
                         </div>
