@@ -1,8 +1,26 @@
 <!DOCTYPE html>
 <?php
 require_once 'vendor/autoload.php';
+
 $produtosModel = new \App\Model\Produtos();
 $produtos = $produtosModel->listar();
+
+$sapatos = [];
+$roupas = [];
+$acessorios = [];
+
+foreach ($produtos as $produto) {
+    if ($produto['id_categoria'] == 1) {
+        $sapatos[] = $produto;
+    }
+    if ($produto['id_categoria'] == 2) {
+        $roupas[] = $produto;
+    }
+    if ($produto['id_categoria'] == 3) {
+        $acessorios[] = $produto;
+    }
+}
+
 ?>
 
 <html lang="pt-br">
@@ -82,117 +100,66 @@ $produtos = $produtosModel->listar();
             </div>
 
             <div class="col-9">
+                <br>
                 <hr>
                 <h2 style="margin-left: 20px;">SAPATOS</h2>
                 <br>
 
                 <div class="row row-cols-1 row-cols-md-3 g-4">
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="img/cards/sapatos/tenis-fila-masculino.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-
-                                <h5 class="card-title">Tênis Fila Rippler, Masculino</h5>
-                                <p class="card-text">R$ </p>
-                                <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
+                    <?php foreach ($sapatos as $sapato) : ?>
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <img src="<?= $sapato['imagem'] ?>" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title"> <?= $sapato['nome'] ?> </h5>
+                                    <p class="card-text">R$ <?= $sapato['preco'] ?> </p>
+                                    <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="img/cards/sapatos/tenis-nike.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Tênis Nike Revolution 5 Masculino</h5>
-                                <p class="card-text">R$ </p>
-                                <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="img/cards/sapatos/nike-court-vision-low-multicolor-0.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Tênis Nike Court Vision LO</h5>
-                                <p class="card-text">R$ </p>
-                                <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
 
+                <br>
                 <hr>
                 <h2 style="margin-left: 20px;">ROUPAS</h2>
                 <br>
 
                 <div class="row row-cols-1 row-cols-md-3 g-4">
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="img/cards/roupas/camisa-repelente.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Camisa Repelente de Insetos UV Masculina</h5>
-                                <p class="card-text">R$ </p>
-                                <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
+                    <?php foreach ($roupas as $roupa) : ?>
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <img src="<?= $roupa['imagem'] ?>" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title"> <?= $roupa['nome'] ?> </h5>
+                                    <p class="card-text">R$ <?= $roupa['preco'] ?> </p>
+                                    <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="img/cards/roupas/camisa-masculina-polo.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Camisa Masculina Polo Puma BMW MMS</h5>
-                                <p class="card-text">R$ </p>
-                                <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="img/cards/roupas/calca-adidas.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Calça Adidas Tiro 21 Track Masculina</h5>
-                                <p class="card-text">R$ </p>
-                                <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
 
+                <br>
                 <hr>
                 <h2 style="margin-left: 20px;">ACESSÓRIOS</h2>
                 <br>
 
                 <div class="row row-cols-1 row-cols-md-3 g-4">
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="img/cards/acessorios/pulseira-masculina.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Pulseira Masculina de Couro Trançado</h5>
-                                <p class="card-text">R$ </p>
-                                <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
+                    <?php foreach ($acessorios as $acessorio) : ?>
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <img src="<?= $acessorio['imagem'] ?>" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title"> <?= $acessorio['nome'] ?> </h5>
+                                    <p class="card-text">R$ <?= $acessorio['preco'] ?> </p>
+                                    <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="img/cards/acessorios/colar.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Colar W.Buscatti Pedra de Ágata Masculino</h5>
-                                <p class="card-text">R$ </p>
-                                <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="img/cards/acessorios/brinco.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Brinco Masculino Argolinha e Cruz Par</h5>
-                                <p class="card-text">R$ </p>
-                                <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
+
             </div>
         </div>
     </div>

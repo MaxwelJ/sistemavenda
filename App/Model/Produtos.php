@@ -58,15 +58,16 @@ class Produtos
                     nome='{$dados['nome']}',
                     quantidade='{$dados['quantidade']}',
                     preco='{$dados['preco']}',
-                    id_categoria='{$dados['id_categoria']}'
+                    id_categoria='{$dados['id_categoria']}',
+                    imagem='{$dados['imagem']}'
                 where id={$dados['id']}
             ";
         }
         // criar
         else {
             $sql = "
-                insert into produtos (nome, preco, quantidade, id_categoria)
-                values ('{$dados['nome']}', '{$dados['preco']}', '{$dados['quantidade']}', '{$dados['id_categoria']}')
+                insert into produtos (nome, preco, quantidade, id_categoria, imagem)
+                values ('{$dados['nome']}', '{$dados['preco']}', '{$dados['quantidade']}', '{$dados['id_categoria']}', '{$dados['imagem']}')
             ";
         }
 
