@@ -112,12 +112,13 @@ $produtos = $produtosModel->listar();
                                     <select id="categoria-edit" name="id_categoria" class="form-select" aria-label="Default select example"></select>
                                 </div>
                                 <div class="col-md-12">
-                                    <label for="imagem-edit" style="margin-top: 8px;">Imagem do produto: </label>
-                                    <input type="file" id="imagem-edit" name="imagem" class="form-control" required />
+                                    <label for="imagem-preview-edit" style="margin-top: 8px;">Imagem do produto: </label> <br>
+                                    <img class="img-thumbnail" id="imagem-preview-edit" src="" alt="">
+                                    <br>
                                 </div>
                                 <div class="col-md-12">
-                                    <br>
-                                    <img class="img-thumbnail" id="imagem-preview-edit" src="" alt="">
+                                    <label for="imagem-edit" style="margin-top: 8px;">Editar imagem:</label>
+                                    <input type="file" id="imagem-edit" name="imagem" class="form-control" onchange="atualizarImagem(2)" required />
                                 </div>
                             </div>
                         </div>
@@ -217,7 +218,12 @@ $produtos = $produtosModel->listar();
                                 </div>
                                 <div class="col-md-12">
                                     <label for="imagem-create" style="margin-top: 8px;">Imagem do produto: </label>
-                                    <input type="file" id="imagem-create" name="imagem" class="form-control" required />
+                                    <input type="file" id="imagem-create" name="imagem" class="form-control" onchange="atualizarImagem(1)" required />
+                                </div>
+                                <div class="col-md-12">
+                                    <br>
+                                    <img class="img-thumbnail" id="imagem-preview-create" src="" alt="">
+                                    <br>
                                 </div>
                             </div>
                         </div>

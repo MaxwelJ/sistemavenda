@@ -47,6 +47,31 @@ async function abrirModalEdit(id) {
     $('#modal_produtos_edit').modal("show")
 }
 
+function atualizarImagem(tipo) {
+    let preview = ''
+    let imagem = ''
+
+    if (tipo === 1) {
+        imagem = $("#imagem-create").get(0).files[0]
+        preview = $("#imagem-preview-create")
+    } else {
+        imagem = $("#imagem-edit").get(0).files[0]
+        preview = $("#imagem-preview-edit")
+    }
+
+    let reader = new FileReader()
+
+    reader.onloadend = function() {
+        preview.prop('src', reader.result)  
+    }
+
+    if(imagem) {
+        reader.readAsDataURL(imagem)
+    } else {
+        preview.prop('src', '')
+    }
+}
+
 // Botão Salvar
 
 $(function () {
@@ -54,6 +79,7 @@ $(function () {
         event.preventDefault();
         salvar('edit');
     })
+
     $("#form-cadastro-create").on('submit', function (event) {
         event.preventDefault();
         salvar('create');
@@ -100,6 +126,8 @@ function abrirModalCreate() {
     $("#nome-create").val('')
     $("#preco-create").val('')
     $("#quantidade-create").val('')
+    $("#imagem-create").val('')
+    $("#imagem-preview-create").prop('src', '')
 
     $.ajax({
         url: '../../backend/produtos/categoriaController.php',
