@@ -2,13 +2,13 @@
 
 namespace App\Model;
 
-include 'Conexao.php';
+include_once 'Conexao.php';
 
 class Produtos
 {
     public function getProdutos($id)
     {
-        $sql = 
+        $sql =
             "SELECT
                 p.*, 
                 c.nome as nome_cat
@@ -59,15 +59,24 @@ class Produtos
                     quantidade='{$dados['quantidade']}',
                     preco='{$dados['preco']}',
                     id_categoria='{$dados['id_categoria']}',
-                    imagem='{$dados['imagem']}'
+                    imagem='{$dados['imagem']}',
+                    descricao='{$dados['descricao']}'
                 where id={$dados['id']}
             ";
         }
         // criar
         else {
             $sql = "
-                insert into produtos (nome, preco, quantidade, id_categoria, imagem)
-                values ('{$dados['nome']}', '{$dados['preco']}', '{$dados['quantidade']}', '{$dados['id_categoria']}', '{$dados['imagem']}')
+                insert into produtos (nome, preco, quantidade, id_categoria, imagem, descricao)
+                values 
+                (
+                    '{$dados['nome']}', 
+                    '{$dados['preco']}', 
+                    '{$dados['quantidade']}', 
+                    '{$dados['id_categoria']}', 
+                    '{$dados['imagem']}', 
+                    '{$dados['descricao']}'
+                )
             ";
         }
 

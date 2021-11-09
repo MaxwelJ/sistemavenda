@@ -3,6 +3,7 @@ async function abrirModalEdit(id) {
     $("#preco-edit").val('')
     $("#quantidade-edit").val('')
     $("#imagem-edit").prop('src', '')
+    $('#descricao-edit').val('')
 
     await $.ajax({
         url: '../../backend/produtos/categoriaController.php',
@@ -37,6 +38,7 @@ async function abrirModalEdit(id) {
             $("#quantidade-edit").val(data.quantidade)
             $("#categoria-edit").val(data.id_categoria)
             $("#imagem-preview-edit").prop('src', '../../' + data.imagem)
+            $('#descricao-edit').val(data.descricao)
         },
         error: function () {
             alert("Deu erro ao salvar.")
@@ -61,11 +63,11 @@ function atualizarImagem(tipo) {
 
     let reader = new FileReader()
 
-    reader.onloadend = function() {
-        preview.prop('src', reader.result)  
+    reader.onloadend = function () {
+        preview.prop('src', reader.result)
     }
 
-    if(imagem) {
+    if (imagem) {
         reader.readAsDataURL(imagem)
     } else {
         preview.prop('src', '')
@@ -128,6 +130,7 @@ function abrirModalCreate() {
     $("#quantidade-create").val('')
     $("#imagem-create").val('')
     $("#imagem-preview-create").prop('src', '')
+    $("#descricao-create").val('')
 
     $.ajax({
         url: '../../backend/produtos/categoriaController.php',
@@ -157,6 +160,7 @@ function abrirModalView(id) {
     $("#preco-view").val('')
     $("#quantidade-view").val('')
     $("#imagem-preview-view").prop('src', '')
+    $("#descricao-view").val('')
 
     $.ajax({
         url: '../../backend/produtos/produtosController.php/',
@@ -173,6 +177,7 @@ function abrirModalView(id) {
             $("#quantidade-view").val(data.quantidade)
             $("#categoria-view").val(data.nome_cat)
             $("#imagem-preview-view").prop('src', '../../' + data.imagem)
+            $("#descricao-view").val(data.descricao)
         },
         error: function () {
             alert("Deu erro ao salvar.")
