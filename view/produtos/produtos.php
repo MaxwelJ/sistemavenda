@@ -112,6 +112,10 @@ $produtos = $produtosModel->listar();
                                     <select id="categoria-edit" name="id_categoria" class="form-select" aria-label="Default select example"></select>
                                 </div>
                                 <div class="col-md-12">
+                                    <label for="decricao-edit">Descrição: </label>
+                                    <textarea id="descricao-edit" name="descricao" class="form-control" required></textarea>
+                                </div>
+                                <div class="col-md-12">
                                     <label for="imagem-preview-edit" style="margin-top: 8px;">Imagem do produto: </label> <br>
                                     <img class="img-thumbnail" id="imagem-preview-edit" src="" alt="">
                                     <br>
@@ -164,11 +168,14 @@ $produtos = $produtosModel->listar();
                                     <label for="categoria-view" style="margin-top: 8px;">Categoria: </label> <br>
                                     <input type="text" id="categoria-view" name="categoria" class="form-control" disabled />
                                 </div>
+                                <div class="col-md-12">
+                                    <label for="decricao-view">Descrição: </label>
+                                    <textarea id="descricao-view" name="descricao" class="form-control" disabled></textarea>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <label for="imagem-view" style="margin-top: 8px;">Imagem do produto: </label>
-                                    <!-- <input type="file" id="imagem-view" name="imagem" class="form-control" disabled /> -->
                                 </div>
                             </div>
                             <div class="row">

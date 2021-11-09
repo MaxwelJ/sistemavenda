@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+<!-- Controller do produto  -->
 <?php
 require_once 'vendor/autoload.php';
 
@@ -20,7 +22,22 @@ foreach ($produtos as $produto) {
         $acessorios[] = $produto;
     }
 }
+?>
 
+<!-- Controller do tipo_pag  -->
+<?php
+require_once 'vendor/autoload.php';
+
+$tipopagsModel = new \App\Model\TipoPag();
+$tipopags = $tipopagsModel->listar();
+?>
+
+<!-- Controller do vendedor  -->
+<?php
+require_once 'vendor/autoload.php';
+
+$vendedoresModel = new \App\Model\Vendedor();
+$vendedores = $vendedoresModel->listar();
 ?>
 
 <html lang="pt-br">
@@ -105,19 +122,20 @@ foreach ($produtos as $produto) {
                 <h2 style="margin-left: 20px;">SAPATOS</h2>
                 <br>
 
-                <div class="row row-cols-1 row-cols-md-3 g-4">
-                    <?php foreach ($sapatos as $sapato) : ?>
-                        <div class="col-md-4">
-                            <div class="card h-100">
-                                <img src="<?= $sapato['imagem'] ?>" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title"> <?= $sapato['nome'] ?> </h5>
-                                    <p class="card-text">R$ <?= $sapato['preco'] ?> </p>
-                                    <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
+                <div class="cards" id="card-sapato">
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                        <?php foreach ($sapatos as $sapato) : ?>
+                            <div class="col-md-4" onClick="abrirModalDetalhes(<?= $sapato['id'] ?>)">
+                                <div class="card h-100">
+                                    <img src="<?= $sapato['imagem'] ?>" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title"> <?= $sapato['nome'] ?> </h5>
+                                        <p class="card-text">R$ <?= $sapato['preco'] ?> </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
 
                 <br>
@@ -125,19 +143,20 @@ foreach ($produtos as $produto) {
                 <h2 style="margin-left: 20px;">ROUPAS</h2>
                 <br>
 
-                <div class="row row-cols-1 row-cols-md-3 g-4">
-                    <?php foreach ($roupas as $roupa) : ?>
-                        <div class="col-md-4">
-                            <div class="card h-100">
-                                <img src="<?= $roupa['imagem'] ?>" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title"> <?= $roupa['nome'] ?> </h5>
-                                    <p class="card-text">R$ <?= $roupa['preco'] ?> </p>
-                                    <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
+                <div class="cards" id="card-roupa">
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                        <?php foreach ($roupas as $roupa) : ?>
+                            <div class="col-md-4" onClick="abrirModalDetalhes(<?= $roupa['id'] ?>)">
+                                <div class="card h-100">
+                                    <img src="<?= $roupa['imagem'] ?>" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title"> <?= $roupa['nome'] ?> </h5>
+                                        <p class="card-text">R$ <?= $roupa['preco'] ?> </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
 
                 <br>
@@ -145,21 +164,89 @@ foreach ($produtos as $produto) {
                 <h2 style="margin-left: 20px;">ACESSÓRIOS</h2>
                 <br>
 
-                <div class="row row-cols-1 row-cols-md-3 g-4">
-                    <?php foreach ($acessorios as $acessorio) : ?>
-                        <div class="col-md-4">
-                            <div class="card h-100">
-                                <img src="<?= $acessorio['imagem'] ?>" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title"> <?= $acessorio['nome'] ?> </h5>
-                                    <p class="card-text">R$ <?= $acessorio['preco'] ?> </p>
-                                    <button type="button" class="btn btn-primary detalhes"><i class="fa fa-eye"></i> Ver detalhes</a></button>
+                <div class="cards" id="card-acessorio">
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                        <?php foreach ($acessorios as $acessorio) : ?>
+                            <div class="col-md-4" onClick="abrirModalDetalhes(<?= $acessorio['id'] ?>)">
+                                <div class="card h-100">
+                                    <img src="<?= $acessorio['imagem'] ?>" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title"> <?= $acessorio['nome'] ?> </h5>
+                                        <p class="card-text">R$ <?= $acessorio['preco'] ?> </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
 
+            </div>
+        </div>
+    </div>
+
+    <div id="modal_detalhes" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detalhes do produto:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick="$('#modal_detalhes').modal('hide')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-detalhes" method="post">
+                        <input type="hidden" name="id_produto" id="id-detalhes">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card mb-3">
+                                    <img class="card-img-top img-thumbnail" id="imagem-preview-detalhes" src="" alt="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-body">
+                                    <h4 class="card-title" id="nome-detalhes"></h4>
+                                    <span>R$ </span><span class="card-text" id="preco-detalhes"></span>
+                                    <p>Parcelado em até 12x sem juros.</p>
+
+                                    <div class="input-group">
+                                        <div class="col-md-12">
+                                            <?php foreach ($tipopags as $tipopag) : ?>
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">
+                                                        <input type="radio" name="id_tipo_pag" id="<?= $tipopag['id'] ?>-tipo-pag" value="<?= $tipopag['id'] ?>">
+                                                        <label for="<?= $tipopag['id'] ?>-tipo-pag"> <?= $tipopag['nome'] ?> </label>
+                                                    </li>
+                                                </ul>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mt-2">
+                                        <label for="id-vendedor">Escolha seu vendedor:</label>
+                                        <select name="id_vendedor" id="id-vendedor" class="form-control">
+                                            <option value="">- SELECIONE -</option>
+                                            <?php foreach ($vendedores as $vendedor) : ?>
+                                                <option value="<?= $vendedor['id'] ?>"><?= $vendedor['nome'] ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <hr>
+                                <h5>Descrição:</h5>
+                                <p id="descricao-detalhes"></p>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Comprar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick="$('#modal_detalhes').modal('hide')"><i class="fa fa-close"></i> Fechar</button>
+                </div>
             </div>
         </div>
     </div>

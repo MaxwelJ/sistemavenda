@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-include 'Conexao.php';
+include_once 'Conexao.php';
 
 class Vendedor
 {

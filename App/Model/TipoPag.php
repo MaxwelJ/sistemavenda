@@ -4,14 +4,14 @@ namespace App\Model;
 
 include_once 'Conexao.php';
 
-class Categoria
+class TipoPag
 {
     public function listar()
     {
         $sql = 
             'SELECT
                 *
-            FROM categoria
+            FROM tipo_pag
             order by id ASC
         ';
 
