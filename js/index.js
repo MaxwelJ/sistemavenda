@@ -1,15 +1,19 @@
-$(document).ready(function () {
-    $(".cpf").mask("000.000.000-00")
-    $(".data").each(function (index, data) {
+$(document).ready(function() {
+    $(".cpf").mask('000.000.000-00')
+    $(".data").each(function(index, data) {
         let parts = $(data).html().split('-');
 
         let newData = parts[2] + '/' + parts[1] + '/' + parts[0]
 
         $(data).html(newData)
     });
-    $(".data-dismiss").each(function () {
-        $(this).modal("hide")
+    $(".data-dismiss").each(function() {
+        $(this).modal('hide')
     })
+
+    $(".fechar_compra").on("click", function() {
+        location.reload()
+    });
 });
 
 function abrirModalDetalhes(id) {
@@ -17,7 +21,11 @@ function abrirModalDetalhes(id) {
     $("#preco-detalhes").html('')
     $("#quantidade-detalhes").html('')
     $("#imagem-preview-detalhes").prop('src', '')
-    $('#descricao-detalhes').html('')
+    $("#descricao-detalhes").html('')
+
+    $("#id-detalhes").val('') // id do produto
+    $("input[name=id_tipo_pag]").prop('checked', false)
+    $("#id-vendedor").val('')
 
     $.ajax({
         url: 'backend/produtos/produtosController.php/',
@@ -26,20 +34,20 @@ function abrirModalDetalhes(id) {
         data: {
             id: id
         },
-        success: function (data) {
+        success: function(data) {
             console.log(data);
-            $("#id-detalhes").html(data.id)
+            $("#id-detalhes").val(data.id)
             $("#nome-detalhes").html(data.nome)
             $("#preco-detalhes").html(data.preco)
             $("#quantidade-detalhes").html(data.quantidade)
             $("#categoria-detalhes").html(data.nome_cat)
             $("#imagem-preview-detalhes").prop('src', data.imagem)
-            $('#descricao-detalhes').html(data.descricao)
+            $("#descricao-detalhes").html(data.descricao)
         },
-        error: function () {
+        error: function() {
             alert("Deu erro ao salvar.")
         }
     })
-    $('#preco-detalhes').mask('#.##0,00', { reverse: true });
-    $('#modal_detalhes').modal("show")
+    $("#preco-detalhes").mask('#.##0,00', { reverse: true });
+    $("#modal_detalhes").modal("show")
 }
