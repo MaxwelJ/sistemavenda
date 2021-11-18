@@ -53,8 +53,9 @@ $vendedores = $vendedoresModel->listar();
     <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
     <script src="https://kit.fontawesome.com/d560921102.js" crossorigin="anonymous"></script>
     <script src="js/index.js"></script>
-    <link href="css/index.css" rel="stylesheet">
     <script src="js/vendedor.js"></script>
+    <script src="js/venda.js"></script>
+    <link href="css/index.css" rel="stylesheet">
     <title>Loja Variedas</title>
 </head>
 
@@ -66,13 +67,19 @@ $vendedores = $vendedoresModel->listar();
         </a>
         <ul class="nav justify-content-end">
             <li class="nav-item">
-                <a class="nav-link active" href="index.php">Página Inicial</a>
+                <a class="nav-link active itens-nav" href="index.php">Página Inicial</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="view/vendedor/vendedor.php">Vendedores</a>
+                <a class="nav-link itens-nav" href="view/vendedor/vendedor.php">Vendedores</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="view/produtos/produtos.php">Produtos</a>
+                <a class="nav-link itens-nav" href="view/produtos/produtos.php">Produtos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link itens-nav" href="view/vendas/vendas.php">Vendas</a>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-outline-dark me-2 mt-1" type="button" onclick="abrirModalCheckout()"><i class="fa fa-shopping-cart"></i> Finalizar compra</button>
             </li>
         </ul>
     </nav>
@@ -125,12 +132,15 @@ $vendedores = $vendedoresModel->listar();
                 <div class="cards" id="card-sapato">
                     <div class="row row-cols-1 row-cols-md-3 g-4">
                         <?php foreach ($sapatos as $sapato) : ?>
-                            <div class="col-md-4" onClick="abrirModalDetalhes(<?= $sapato['id'] ?>)">
+                            <div class="col-md-4">
                                 <div class="card h-100">
-                                    <img src="<?= $sapato['imagem'] ?>" class="card-img-top" alt="...">
+                                    <img src="<?= $sapato['imagem'] ?>" class="card-img-top" alt="..." onClick="abrirModalDetalhes(<?= $sapato['id'] ?>)">
                                     <div class="card-body">
                                         <h5 class="card-title"> <?= $sapato['nome'] ?> </h5>
                                         <p class="card-text">R$ <?= $sapato['preco'] ?> </p>
+                                        <div class="botaoCarrinho">
+                                            <button type="button" class="btn btn-outline-dark" onClick="adicionarCarrinho(<?= $sapato['id'] ?>)"><i class="fa fa-plus"></i> Adicionar ao carrinho</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -146,12 +156,13 @@ $vendedores = $vendedoresModel->listar();
                 <div class="cards" id="card-roupa">
                     <div class="row row-cols-1 row-cols-md-3 g-4">
                         <?php foreach ($roupas as $roupa) : ?>
-                            <div class="col-md-4" onClick="abrirModalDetalhes(<?= $roupa['id'] ?>)">
+                            <div class="col-md-4">
                                 <div class="card h-100">
-                                    <img src="<?= $roupa['imagem'] ?>" class="card-img-top" alt="...">
+                                    <img src="<?= $roupa['imagem'] ?>" class="card-img-top" alt="..." onClick="abrirModalDetalhes(<?= $roupa['id'] ?>)">
                                     <div class="card-body">
                                         <h5 class="card-title"> <?= $roupa['nome'] ?> </h5>
                                         <p class="card-text">R$ <?= $roupa['preco'] ?> </p>
+                                        <button type="submit" class="btn btn-outline-dark botaoCarrinho" onClick="adicionarCarrinho(<?= $roupa['id'] ?>)"><i class="fa fa-plus"></i> Adicionar ao carrinho</button>
                                     </div>
                                 </div>
                             </div>
@@ -167,12 +178,13 @@ $vendedores = $vendedoresModel->listar();
                 <div class="cards" id="card-acessorio">
                     <div class="row row-cols-1 row-cols-md-3 g-4">
                         <?php foreach ($acessorios as $acessorio) : ?>
-                            <div class="col-md-4" onClick="abrirModalDetalhes(<?= $acessorio['id'] ?>)">
+                            <div class="col-md-4">
                                 <div class="card h-100">
-                                    <img src="<?= $acessorio['imagem'] ?>" class="card-img-top" alt="...">
+                                    <img src="<?= $acessorio['imagem'] ?>" class="card-img-top" alt="..." onClick="abrirModalDetalhes(<?= $acessorio['id'] ?>)">
                                     <div class="card-body">
                                         <h5 class="card-title"> <?= $acessorio['nome'] ?> </h5>
                                         <p class="card-text">R$ <?= $acessorio['preco'] ?> </p>
+                                        <button type="submit" class="btn btn-outline-dark botaoCarrinho" onClick="adicionarCarrinho(<?= $acessorio['id'] ?>)"><i class="fa fa-plus"></i> Adicionar ao carrinho</button>
                                     </div>
                                 </div>
                             </div>
@@ -185,67 +197,128 @@ $vendedores = $vendedoresModel->listar();
     </div>
 
     <div id="modal_detalhes" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Detalhes do produto:</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick="$('#modal_detalhes').modal('hide')">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="form-detalhes" method="post">
+        <form id="form-detalhes" method="post">
+            <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Detalhes do produto:</h5>
+                        <button type="button" class="close btn btn-outline-danger" data-dismiss="modal" aria-label="Close" onClick="$('#modal_detalhes').modal('hide')">
+                            <span aria-hidden="true"><i class="fa fa-close"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
                         <input type="hidden" name="id_produto" id="id-detalhes">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="card mb-3">
-                                    <img class="card-img-top img-thumbnail" id="imagem-preview-detalhes" src="" alt="">
+                                    <img class="img-fluid" id="imagem-preview-detalhes" src="" alt="">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="card-body">
                                     <h4 class="card-title" id="nome-detalhes"></h4>
                                     <span>R$ </span><span class="card-text" id="preco-detalhes"></span>
-                                    <p>Parcelado em até 12x sem juros.</p>
+                                    <p style="font-size: 13px; color: red;">Parcelado em até 12x sem juros.</p>
 
-                                    <div class="input-group">
-                                        <div class="col-md-12">
-                                            <?php foreach ($tipopags as $tipopag) : ?>
-                                                <ul class="list-group">
-                                                    <li class="list-group-item">
-                                                        <input type="radio" name="id_tipo_pag" id="<?= $tipopag['id'] ?>-tipo-pag" value="<?= $tipopag['id'] ?>">
-                                                        <label for="<?= $tipopag['id'] ?>-tipo-pag"> <?= $tipopag['nome'] ?> </label>
-                                                    </li>
-                                                </ul>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    </div>
+                                    <hr>
 
-                                    <div class="col-md-12 mt-2">
-                                        <label for="id-vendedor">Escolha seu vendedor:</label>
-                                        <select name="id_vendedor" id="id-vendedor" class="form-control">
-                                            <option value="">- SELECIONE -</option>
-                                            <?php foreach ($vendedores as $vendedor) : ?>
-                                                <option value="<?= $vendedor['id'] ?>"><?= $vendedor['nome'] ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
+                                    <div class="col-md-12">
+                                        <h5>Descrição:</h5>
+                                        <p id="descricao-detalhes"></p>
                                     </div>
 
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <hr>
-                                <h5>Descrição:</h5>
-                                <p id="descricao-detalhes"></p>
-                            </div>
                         </div>
 
-                    </form>
-                </div>
+                    </div>
 
+                    <div class="modal-footer">
+                        <!-- <button type="submit" class="btn btn-outline-primary"><i class="fa fa-shopping-cart"></i> Comprar</button> -->
+                        <button type="button" class="btn btn-outline-dark"><i class="fa fa-plus"></i> Adicionar ao carrinho</button>
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal" onClick="$('#modal_detalhes').modal('hide')"><i class="fa fa-close"></i> Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="modal_checkout" class="modal fade" tabindex="-1">
+        <form id="form-checkout" method="post">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Finalizar Compra</h5>
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="col-md-12">
+                            <label for="">Produtos adicionados:</label>
+                            <div class="mt-3 justify-content-center" id="produto-adicionado">
+
+                            </div>
+                            <div>
+                                <label for="">Valor final: R$</label>
+                                <h4 class="dinheiro" id="valor-final"></h4>
+                            </div>
+                            <hr class="mt-4 mb-2">
+                        </div>
+
+                        <div class="alert alert-secondary" role="alert">
+                            Precisamos de seus dados para finalizar a compra.
+                        </div>
+                        <div class="input-group">
+                            <div class="col-md-12">
+                                <label for="">Formas de pagamento:</label>
+                                <?php foreach ($tipopags as $tipopag) : ?>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <input type="radio" name="id_tipo_pag" id="<?= $tipopag['id'] ?>-tipo-pag" value="<?= $tipopag['id'] ?>" />
+                                            <label for="<?= $tipopag['id'] ?>-tipo-pag"> <?= $tipopag['nome'] ?> </label>
+                                        </li>
+                                    </ul>
+                                <?php endforeach; ?>
+                            </div>
+                        </div> <br>
+
+                        <div class="col-md-12">
+                            <label for="id-vendedor">Escolha seu vendedor:</label>
+                            <select name="id_vendedor" id="id-vendedor" class="form-control" required>
+                                <option value="">- SELECIONE -</option>
+                                <?php foreach ($vendedores as $vendedor) : ?>
+                                    <option value="<?= $vendedor['id'] ?>"><?= $vendedor['nome'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class="fa fa-close"></i> Fechar</button>
+                        <button type="submit" class="btn btn-outline-dark" onclick="comprar()"><i class="fa fa-shopping-cart"></i> Finalizar Compra</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="modal_compra_finalizada" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Compra Finalizada</h5>
+                    <button type="button" class="close fechar_compra" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="msg-compra-finalizada"></p>
+                </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Comprar</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick="$('#modal_detalhes').modal('hide')"><i class="fa fa-close"></i> Fechar</button>
+                    <button type="button" class="btn btn-secondary fechar_compra" data-dismiss="modal"><i class="fa fa-close"></i> Fechar</button>
                 </div>
             </div>
         </div>

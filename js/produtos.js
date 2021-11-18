@@ -16,7 +16,7 @@ async function abrirModalEdit(id) {
             $(data).each(function (index, categoria) {
                 html += `<option value="${categoria.id}">${categoria.nome}</option>`
             })
-
+            
             $('#categoria-edit').append(html)
         },
         error: function () {

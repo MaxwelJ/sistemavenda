@@ -18,8 +18,8 @@ $vendedores = $vendedorModel->listar();
     <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
     <script src="https://kit.fontawesome.com/d560921102.js" crossorigin="anonymous"></script>
     <script src="../../js/index.js"></script>
-    <link href="../../css/index.css" rel="stylesheet">
     <script src="../../js/vendedor.js"></script>
+    <link href="../../css/index.css" rel="stylesheet">
     <title>Loja Variedas</title>
 </head>
 
@@ -29,13 +29,16 @@ $vendedores = $vendedorModel->listar();
         <a class="navbar-brand" style="margin-left: 10px;"><strong>Loja variedades</strong></a>
         <ul class="nav justify-content-end">
             <li class="nav-item">
-                <a class="nav-link active" href="../../index.php">Página Inicial</a>
+                <a class="nav-link active itens-nav" href="../../index.php">Página Inicial</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="vendedor.php">Vendedores</a>
+                <a class="nav-link itens-nav" href="vendedor.php">Vendedores</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../produtos/produtos.php">Produtos</a>
+                <a class="nav-link itens-nav" href="../produtos/produtos.php">Produtos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link itens-nav" href="../vendas/vendas.php">Vendas</a>
             </li>
         </ul>
     </nav>
@@ -43,9 +46,9 @@ $vendedores = $vendedorModel->listar();
     <div class="container conteudo">
         <div class="table-reponsive w-100">
             <table class="table table-bordered" style="margin-top: 10px;">
-                <thead>
+                <thead style="background-color: #e3f2fd;">
                     <tr>
-                        <th colspan=5 class="bg-info text-dark">
+                        <th colspan=5>
                             <span class="text-center" style="font-size: 1.5rem;">Lista de vendedores</span>
                             <button type="button" class="btn btn-outline-dark" style="float: right;" onClick="abrirModalCreate()"><i class="fa fa-plus"></i> Adicionar</button>
                         </th>
@@ -85,8 +88,8 @@ $vendedores = $vendedorModel->listar();
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Editar cadastro</h5>
-                        <button type="button" class="close" onClick="$('#modal_vendedor_edit').modal('hide')" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                        <button type="button" class="close btn btn-outline-danger" onClick="$('#modal_vendedor_edit').modal('hide')" aria-label="Close">
+                            <span aria-hidden="true"><i class="fa fa-close"></i></span>
                         </button>
                     </div>
                     <div class="modal-body">
@@ -123,8 +126,8 @@ $vendedores = $vendedorModel->listar();
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Cadastro</h5>
-                        <button type="button" class="close" onClick="$('#modal_vendedor_view').modal('hide')" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                        <button type="button" class="close btn btn-outline-danger" onClick="$('#modal_vendedor_view').modal('hide')" aria-label="Close">
+                            <span aria-hidden="true"><i class="fa fa-close"></i></span>
                         </button>
                     </div>
                     <div class="modal-body">
@@ -161,8 +164,8 @@ $vendedores = $vendedorModel->listar();
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Criar cadastro</h5>
-                        <button type="button" class="close" onClick="$('#modal_vendedor_create').modal('hide')" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                        <button type="button" class="close btn btn-outline-danger" onClick="$('#modal_vendedor_create').modal('hide')" aria-label="Close">
+                            <span aria-hidden="true"><i class="fa fa-close"></i></span>
                         </button>
                     </div>
                     <div class="modal-body">

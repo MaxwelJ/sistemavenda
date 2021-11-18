@@ -1,4 +1,4 @@
-.menu{
+.menu {
     position: fixed;
     top: 0;
     left: 0;
@@ -8,8 +8,17 @@
     background-color: white;
 }
 
-.conteudo{
+.conteudo {
     margin-top: 80px;
     display: flex;
     width: 100%;
+}
+
+.itens-nav {
+    color: black;
+}
+
+.img-compra{
+    width: 70px;
+    height: 70px;
 }

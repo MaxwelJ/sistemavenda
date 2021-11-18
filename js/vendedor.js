@@ -105,7 +105,7 @@ function apagar(id) {
     if (confirm('Deseja realmente apagar esse cadastro?')) {
 
 
-        $.getJSON("../../backend/vendedor/apagar.php", {
+        $.getJSON("../../backend/vendedor/apagarController.php", {
             id: id
         }, function (data) {
             if (data.status == true) {

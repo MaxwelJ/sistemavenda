@@ -8,9 +8,10 @@ class Vendedor
 {
     public function getVendedor($id)
     {
-        $sql = "SELECT * FROM vendedor WHERE id={$id}";
+        $sql = "SELECT * FROM vendedor WHERE id=?";
 
         $stmt = Conexao::getConn()->prepare($sql);
+        $stmt->bindParam(1, $id);
         $stmt->execute();
 
         $resultado = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -37,20 +38,20 @@ class Vendedor
         // var_dump($dados);
         // editar
         if (isset($dados['id']) && !empty($dados['id'])) {
-            $sql = "
-                update vendedor
-                set 
+            $sql = 
+            "UPDATE vendedor
+                SET 
                     nome='{$dados['nome']}',
                     cpf='{$dados['cpf']}',
                     data_nasc='{$dados['data_nasc']}'
-                where id={$dados['id']}
+                WHERE id={$dados['id']}
             ";
         }
         // criar
         else {
-            $sql = "
-                insert into vendedor (nome, cpf, data_nasc)
-                values ('{$dados['nome']}', '{$dados['cpf']}', '{$dados['data_nasc']}')
+            $sql = 
+            "INSERT INTO vendedor (nome, cpf, data_nasc)
+                VALUES ('{$dados['nome']}', '{$dados['cpf']}', '{$dados['data_nasc']}')
             ";
         }
 
@@ -59,9 +60,10 @@ class Vendedor
     }
 
     public function apagar($id) {
-        $sql = "delete from vendedor where id={$id}";
+        $sql = "DELETE FROM vendedor WHERE id=?";
 
         $stmt = Conexao::getConn()->prepare($sql);
+        $stmt->bindParam(1, $id);
         $stmt->execute();
     }
 }
