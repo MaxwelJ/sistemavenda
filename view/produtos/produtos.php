@@ -108,7 +108,7 @@ $produtos = $produtosModel->listar();
                                 </div>
                                 <div class="col-md-4">
                                     <label for="quantidade-edit" style="margin-top: 8px;">Quantidade: </label>
-                                    <input type="text" id="quantidade-edit" name="quantidade" class="form-control" required />
+                                    <input type="number" id="quantidade-edit" name="quantidade" class="form-control" required />
                                 </div>
                                 <div class="col-md-4">
                                     <label for="categoria-edit" style="margin-top: 8px;">Categoria: </label> <br>
@@ -125,7 +125,7 @@ $produtos = $produtosModel->listar();
                                 </div>
                                 <div class="col-md-12">
                                     <label for="imagem-edit" style="margin-top: 8px;">Editar imagem:</label>
-                                    <input type="file" id="imagem-edit" name="imagem" class="form-control" onchange="atualizarImagem(2)" required />
+                                    <input type="file" id="imagem-edit" name="imagem" class="form-control" onchange="atualizarImagem(2)" />
                                 </div>
                             </div>
                         </div>
@@ -165,7 +165,7 @@ $produtos = $produtosModel->listar();
                                 </div>
                                 <div class="col-md-4">
                                     <label for="quantidade-view" style="margin-top: 8px;">Quantidade: </label>
-                                    <input type="text" id="quantidade-view" name="quantidade" class="form-control" disabled />
+                                    <input type="number" id="quantidade-view" name="quantidade" class="form-control" disabled />
                                 </div>
                                 <div class="col-md-4">
                                     <label for="categoria-view" style="margin-top: 8px;">Categoria: </label> <br>
@@ -220,7 +220,7 @@ $produtos = $produtosModel->listar();
                                 </div>
                                 <div class="col-md-4">
                                     <label for="quantidade-create" style="margin-top: 8px;">Quantidade: </label>
-                                    <input type="text" id="quantidade-create" name="quantidade" class="form-control" required />
+                                    <input type="number" id="quantidade-create" name="quantidade" class="form-control" required />
                                 </div>
                                 <div class="col-md-4">
                                     <label for="categoria-create" style="margin-top: 8px;">Categoria: </label> <br>

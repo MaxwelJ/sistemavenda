@@ -79,7 +79,7 @@ $vendedores = $vendedoresModel->listar();
                 <a class="nav-link itens-nav" href="view/vendas/vendas.php">Vendas</a>
             </li>
             <li class="nav-item">
-                <button class="btn btn-outline-dark me-2 mt-1" type="button" onclick="abrirModalCheckout()"><i class="fa fa-shopping-cart"></i> Finalizar compra</button>
+                <button class="btn btn-outline-dark me-2 mt-1" type="button" onclick="abrirModalCheckout()"><i class="fa fa-shopping-cart"></i> Ver carrinho <span class="rounded bg-danger text-white px-2 mx-auto my-auto" id="cont"></span></button>
             </li>
         </ul>
     </nav>
@@ -137,7 +137,7 @@ $vendedores = $vendedoresModel->listar();
                                     <img src="<?= $sapato['imagem'] ?>" class="card-img-top" alt="..." onClick="abrirModalDetalhes(<?= $sapato['id'] ?>)">
                                     <div class="card-body">
                                         <h5 class="card-title"> <?= $sapato['nome'] ?> </h5>
-                                        <p class="card-text">R$ <?= $sapato['preco'] ?> </p>
+                                        <p class="card-text">R$ <span class="preco"><?= $sapato['preco'] ?></span> </p>
                                         <div class="botaoCarrinho">
                                             <button type="button" class="btn btn-outline-dark" onClick="adicionarCarrinho(<?= $sapato['id'] ?>)"><i class="fa fa-plus"></i> Adicionar ao carrinho</button>
                                         </div>
@@ -161,7 +161,7 @@ $vendedores = $vendedoresModel->listar();
                                     <img src="<?= $roupa['imagem'] ?>" class="card-img-top" alt="..." onClick="abrirModalDetalhes(<?= $roupa['id'] ?>)">
                                     <div class="card-body">
                                         <h5 class="card-title"> <?= $roupa['nome'] ?> </h5>
-                                        <p class="card-text">R$ <?= $roupa['preco'] ?> </p>
+                                        <p class="card-text">R$ <span class="preco"><?= $roupa['preco'] ?></span> </p>
                                         <button type="submit" class="btn btn-outline-dark botaoCarrinho" onClick="adicionarCarrinho(<?= $roupa['id'] ?>)"><i class="fa fa-plus"></i> Adicionar ao carrinho</button>
                                     </div>
                                 </div>
@@ -183,7 +183,7 @@ $vendedores = $vendedoresModel->listar();
                                     <img src="<?= $acessorio['imagem'] ?>" class="card-img-top" alt="..." onClick="abrirModalDetalhes(<?= $acessorio['id'] ?>)">
                                     <div class="card-body">
                                         <h5 class="card-title"> <?= $acessorio['nome'] ?> </h5>
-                                        <p class="card-text">R$ <?= $acessorio['preco'] ?> </p>
+                                        <p class="card-text">R$ <span class="preco"><?= $acessorio['preco'] ?></span> </p>
                                         <button type="submit" class="btn btn-outline-dark botaoCarrinho" onClick="adicionarCarrinho(<?= $acessorio['id'] ?>)"><i class="fa fa-plus"></i> Adicionar ao carrinho</button>
                                     </div>
                                 </div>
@@ -235,7 +235,7 @@ $vendedores = $vendedoresModel->listar();
 
                     <div class="modal-footer">
                         <!-- <button type="submit" class="btn btn-outline-primary"><i class="fa fa-shopping-cart"></i> Comprar</button> -->
-                        <button type="button" class="btn btn-outline-dark"><i class="fa fa-plus"></i> Adicionar ao carrinho</button>
+                        <button id="adicionar-carrinho-modal" type="button" class="btn btn-outline-dark"><i class="fa fa-plus"></i> Adicionar ao carrinho</button>
                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal" onClick="$('#modal_detalhes').modal('hide')"><i class="fa fa-close"></i> Fechar</button>
                     </div>
                 </div>
@@ -248,7 +248,7 @@ $vendedores = $vendedoresModel->listar();
             <div class="modal-dialog modal-dialog-scrollable modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Finalizar Compra</h5>
+                        <h5 class="modal-title">Carrinho</h5>
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></button>
                     </div>
 
@@ -260,8 +260,8 @@ $vendedores = $vendedoresModel->listar();
 
                             </div>
                             <div>
-                                <label for="">Valor final: R$</label>
-                                <h4 class="dinheiro" id="valor-final"></h4>
+                                <label for="">Valor final:</label>
+                                <h4>R$ <span class="preco" id="valor-final"></span></h4>
                             </div>
                             <hr class="mt-4 mb-2">
                         </div>
@@ -298,7 +298,7 @@ $vendedores = $vendedoresModel->listar();
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class="fa fa-close"></i> Fechar</button>
-                        <button type="submit" class="btn btn-outline-dark" onclick="comprar()"><i class="fa fa-shopping-cart"></i> Finalizar Compra</button>
+                        <button type="submit" class="btn btn-outline-dark"><i class="fa fa-shopping-cart"></i> Finalizar Compra</button>
                     </div>
                 </div>
             </div>

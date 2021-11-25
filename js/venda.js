@@ -68,81 +68,6 @@ function apagar(id) {
     }
 }
 
-// Função para salvar os produtos no carrinho
-
-function adicionarCarrinho(id_produto) {
-    let aux = false
-
-    let carrinho = JSON.parse(sessionStorage.getItem("carrinho")) ?? []
-
-    $(carrinho).each(function (index, item) {
-        if (item == id_produto) {
-            aux = true;
-        }
-    })
-    if (!aux) {
-        carrinho.push(id_produto)
-    } else {
-        alert("Produto já adicionado!")
-        return
-    }
-
-    // console.log(carrinho)
-    sessionStorage.setItem("carrinho", JSON.stringify(carrinho))
-}
-
-function abrirModalCheckout() {
-    let data = {
-        produtos: sessionStorage.getItem("carrinho").replace("[", "").replace("]", "")
-    }
-
-    $.ajax({
-        url: 'backend/venda/carrinhoController.php',
-        type: 'get',
-        dataType: 'json',
-        data: data,
-        success: function (data) {
-
-            $("#produto-adicionado").html('')
-
-            let html = ``
-
-            $(data).each(function (index, produto) {
-                html +=
-                    `
-                <div class="col-md-12 shadow-sm border rounded mb-2">
-                    <div class="row justify-content-center">
-                        <div class="col-md-2 my-auto">
-                            <img class="img-fluid img-compra mx-4" src="${produto.imagem}">
-                        </div>
-                        <div class="col-md-5 my-auto">
-                            <h6>${produto.nome}</h6>
-                            <span >R$ ${produto.preco}</span>
-                        </div>
-                        <div class="col-md-5 div-qtd my-auto">
-                            <button class="btn btn-sm btn-outline-danger mx-2 float-end" type="button"><i class="fa fa-times"></i> Remover</button>
-                            <button class="btn btn-sm btn-outline-dark float-end diminuir-qtd" type="button"><i class="fa fa-minus"></i></button>
-                            <div class="float-end mx-2 num-qtd"> 1 </div>
-                            <button class="btn btn-sm btn-outline-dark float-end adicionar-qtd" type="button"><i class="fa fa-plus"></i></button>
-                            <input type="hidden" class="preco-produto" value="${produto.preco}"/>
-                            <input type="hidden" class="valor-produto" value="${produto.preco}"/>
-                        </div>
-                    </div>
-                </div>
-                `
-            })
-            $("#produto-adicionado").append(html)
-        },
-        error: function () {
-            alert('Erro ao finalizar sua compra.')
-        }
-    }).done(function () {
-        valorFinal()
-    })
-    
-    $("#modal_checkout").modal("show")
-}
-
 $(document).on('click', ".diminuir-qtd", function (event) {
     event.preventDefault();
     let qtd = $(this).closest(".div-qtd").children(".num-qtd").html()
@@ -177,6 +102,32 @@ $(document).on('click', ".adicionar-qtd", function (event) {
     valorFinal()
 })
 
+$(document).on('click', ".remover-item", function (event) {
+    event.preventDefault();
+    let carrinho = sessionStorage.getItem("carrinho")
+    let idProduto = $(this).closest(".div-qtd").children(".id-produto").val()
+    let novoCarrinho = []
+
+    if (carrinho) {
+        carrinho = JSON.parse(carrinho)
+
+        $(carrinho).each(function (index, item) {
+            if (idProduto != item) {
+                novoCarrinho.push(item)
+            }
+        })
+
+        novoCarrinho = JSON.stringify(novoCarrinho)
+
+        sessionStorage.setItem("carrinho", novoCarrinho)
+
+        $(this).closest(".div-qtd").parent().parent().remove()
+
+        contCarrinho()
+        valorFinal()
+    }
+})
+
 function valorFinal() {
     let valorFinal = 0
 
@@ -184,8 +135,10 @@ function valorFinal() {
         valorFinal = valorFinal + parseFloat($(valorProduto).val().replace(",", ".")) 
     })
 
+    valorFinal = valorFinal.toFixed(2).toString().replace(".", ",")
+   
     $("#valor-final").html(valorFinal)
-    // $("#valor-final").html().replace(".", ",")
+   
 }
 
 $(function () {
@@ -209,19 +162,24 @@ function comprar() {
         return
     }
 
-    let produtos = []
+    let produtos = JSON.parse(sessionStorage.getItem("carrinho"))
 
-    // array
+    let quantidade = []
+
+    $(".num-qtd").each(function (index, qtd){
+        quantidade[index] = parseInt($(qtd).html())
+    })
 
     const url = 'backend/venda/salvarController.php'
 
     let data = {
         id_tipo_pag: $("input[name=id_tipo_pag]:checked").val(),
         id_vendedor: $("#id-vendedor").val(),
+        quantidade: quantidade,
         produtos: produtos
     }
 
-    console.log(data)
+    // console.log(data); return
 
     $.ajax({
         url: url,
@@ -229,10 +187,12 @@ function comprar() {
         dataType: 'json',
         data: data,
         success: function (retorno) {
-            console.log(retorno)
+            // console.log(retorno)
             if (retorno.cod === 0) {
                 $("#msg-compra-finalizada").html(retorno.msg)
                 $("#modal_compra_finalizada").modal("show")
+                
+                sessionStorage.removeItem("carrinho")
             } else {
                 alert(retorno.msg)
             }

@@ -15,19 +15,16 @@ try {
     // var_dump($_POST);die;
     
     $_POST['data_venda'] = date("Y-m-d");
-    $id_produto = $_POST['id_produto'];
 
-    // $produtos = [
-        // "id_produto" => $_POST['id_produto'],
-        // "nome_produto" => $_POST['nomeProduto'],
-        // "preco_produto" => $_POST['precoProduto'],
-        // "quantidade" => $_POST['quantidade']
-    // ];
-
-    // var_dump($produto);die;
+    $produtos = $_POST['produtos'];
+    unset($_POST['produtos']);
     
+    $quantidade = $_POST['quantidade'];
+    unset($_POST['quantidade']);
+
     $id_venda = $vendaModel->salvar($_POST);
-    $itens_venda = $itensVendaModel->salvar($id_venda, $id_produto);
+    // var_dump($id_venda);die;
+    $itens_venda = $itensVendaModel->salvar($id_venda, $produtos, $quantidade);
 
     $json = [
         "cod" => 0,

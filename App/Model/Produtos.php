@@ -53,21 +53,32 @@ class Produtos
 
     public function salvar($dados)
     {
-        // var_dump($dados);
+        $sql = '';
+
+        // var_dump($dados);die;
+
         // editar
         if (isset($dados['id']) && !empty($dados['id'])) {
-            $sql = 
+            $sql .= 
             "UPDATE produtos
                 SET 
                     nome='{$dados['nome']}',
                     quantidade='{$dados['quantidade']}',
                     preco='{$dados['preco']}',
                     id_categoria='{$dados['id_categoria']}',
-                    imagem='{$dados['imagem']}',
                     descricao='{$dados['descricao']}'
-                WHERE id={$dados['id']}
             ";
+
+            // echo json_encode($dados['imagem']);
+
+            if (!empty($dados['imagem'])){
+                $sql .= ", imagem='{$dados['imagem']}'";
+            }
+
+            $sql .= "WHERE id={$dados['id']}";
+
         }
+
         // criar
         else {
             $sql = 

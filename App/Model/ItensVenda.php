@@ -27,19 +27,23 @@ class ItensVenda
         $stmt->bindParam(1, $id);
         $stmt->execute();
 
-        $resultado = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $resultado = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         return $resultado;
     }
 
-    public function salvar($idVenda, $idProduto)
+    public function salvar($idVenda, $produtos, $quantidade)
     {
 
-        $sql = "INSERT INTO itens_venda (id_venda, id_produto, quantidade) VALUES (?, ?, 1)";
+        $sql = "INSERT INTO itens_venda (id_venda, id_produto, quantidade) VALUES (?, ?, ?)";
         
-        $stmt = Conexao::getConn()->prepare($sql);
-        $stmt->bindParam(1, $idVenda);
-        $stmt->bindParam(2, $idProduto);
-        $stmt->execute();
+        for ($i=0; $i < count($produtos); $i++) {
+            // var_dump($produto);die;
+            $stmt = Conexao::getConn()->prepare($sql);
+            $stmt->bindParam(1, $idVenda);
+            $stmt->bindParam(2, $produtos[$i]);
+            $stmt->bindParam(3, $quantidade[$i]);
+            $stmt->execute();
+        }
        
     }
 
