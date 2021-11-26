@@ -50,7 +50,6 @@ $vendas = $vendasModel->listar();
                     <tr>
                         <th colspan=5>
                             <span class="text-center" style="font-size: 1.5rem;">Lista de vendas</span>
-                            <button type="button" class="btn btn-outline-dark" style="float: right;" onClick="abrirModalCreate()"><i class="fa fa-plus"></i> Adicionar</button>
                         </th>
                     </tr>
                     <tr>
@@ -130,6 +129,10 @@ $vendas = $vendasModel->listar();
 
                                         </tbody>
                                     </table>
+                                    <div style="float: right;">
+                                        <label for="">Valor total da venda:</label>
+                                        <h4 class="text-end">R$ <span id="preco-total-view"></span></h4>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -67,7 +67,7 @@ $produtos = $produtosModel->listar();
                         <tr>
                             <td class="text-center"><?= $produtos['id'] ?></td>
                             <td><?= $produtos['nome'] ?></td>
-                            <td>R$ <?= $produtos['preco'] ?></td>
+                            <td>R$ <span class="preco"><?= $produtos['preco'] ?></span></td>
                             <td class="text-center"><?= $produtos['quantidade'] ?></td>
                             <td class="text-center"><?= $produtos['nome_cat'] ?></td>
                             <td>

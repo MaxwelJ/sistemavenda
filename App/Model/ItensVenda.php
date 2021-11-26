@@ -16,7 +16,8 @@ class ItensVenda
             p.nome as nomeProduto,
             p.preco as precoProduto,
             c.nome as nomeCategoria,
-            iv.quantidade as quantidade
+            iv.quantidade as quantidade,
+            iv.valor_venda as valorVenda
         FROM itens_venda iv
         INNER JOIN produtos p ON iv.id_produto = p.id
         INNER JOIN categoria c ON p.id_categoria = c.id
@@ -31,10 +32,10 @@ class ItensVenda
         return $resultado;
     }
 
-    public function salvar($idVenda, $produtos, $quantidade)
+    public function salvar($idVenda, $produtos, $quantidade, $valorVenda)
     {
 
-        $sql = "INSERT INTO itens_venda (id_venda, id_produto, quantidade) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO itens_venda (id_venda, id_produto, quantidade, valor_venda) VALUES (?, ?, ?, ?)";
         
         for ($i=0; $i < count($produtos); $i++) {
             // var_dump($produto);die;
@@ -42,6 +43,7 @@ class ItensVenda
             $stmt->bindParam(1, $idVenda);
             $stmt->bindParam(2, $produtos[$i]);
             $stmt->bindParam(3, $quantidade[$i]);
+            $stmt->bindParam(4, $valorVenda[$i]);
             $stmt->execute();
         }
        

@@ -298,7 +298,7 @@ $vendedores = $vendedoresModel->listar();
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class="fa fa-close"></i> Fechar</button>
-                        <button type="submit" class="btn btn-outline-dark"><i class="fa fa-shopping-cart"></i> Finalizar Compra</button>
+                        <button type="submit" class="btn btn-outline-dark" onclick="$('#modal_checkout').modal('hide')"><i class="fa fa-shopping-cart"></i> Finalizar Compra</button>
                     </div>
                 </div>
             </div>
@@ -310,15 +310,12 @@ $vendedores = $vendedoresModel->listar();
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Compra Finalizada</h5>
-                    <button type="button" class="close fechar_compra" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                 </div>
                 <div class="modal-body">
                     <p id="msg-compra-finalizada"></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary fechar_compra" data-dismiss="modal"><i class="fa fa-close"></i> Fechar</button>
+                    <button type="button" class="btn btn-outline-danger fechar_compra" data-dismiss="modal"><i class="fa fa-close"></i> Fechar</button>
                 </div>
             </div>
         </div>

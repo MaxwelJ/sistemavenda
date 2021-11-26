@@ -49,8 +49,9 @@ function abrirModalDetalhes(id) {
         error: function () {
             alert("Deu erro ao salvar.")
         }
+    }).done(function () {
+        $("#preco-detalhes").mask('#.##0,00', { reverse: true });
     })
-    $("#preco-detalhes").mask('#.##0,00', { reverse: true });
     $("#modal_detalhes").modal("show")
 }
 
@@ -77,6 +78,7 @@ function adicionarCarrinho(id_produto) {
     sessionStorage.setItem("carrinho", JSON.stringify(carrinho))
 
     alert("Produto foi adicionado ao carrinho com sucesso!")
+    $('#modal_detalhes').modal('hide')
     contCarrinho()
 }
 

@@ -17,28 +17,43 @@ function abrirModalView(id) {
             $("#nome-view").val(data.nome_vendedor)
             $("#tipo-pag-view").val(data.tipo_pag_nome)
             $("#data-view").val(data.data_venda)
+            // $("#preco-total-view").html(data.itens_venda.valor_venda)
 
             $("#produtos-view").html('')
-
             let html = ``
 
+            $("#preco-total-view").html('')
+            let precoTotalView = 0
+
+            // console.log(data.itens_venda);
             $(data.itens_venda).each(function (index, produto) {
                 html +=
                     `<tr>
-                    <td>${produto.coditem}</td>
-                    <td>${produto.codproduto}</td>
-                    <td>${produto.nomeproduto}</td>
-                    <td>R$ ${produto.precoproduto}</td>
-                    <td>${produto.nomecategoria}</td>
-                    <td>${produto.quantidade}</td>
-                </tr>`
+                        <td>${produto.coditem}</td>
+                        <td>${produto.codproduto}</td>
+                        <td>${produto.nomeproduto}</td>
+                        <td>R$ <span class="preco-view">${produto.valorvenda}</span></td>
+                        <td>${produto.nomecategoria}</td>
+                        <td>${produto.quantidade}</td>
+                    </tr>`
+
+                    precoTotalView += parseFloat(produto.valorvenda)
             })
 
             $("#produtos-view").append(html)
+
+            $("#preco-total-view").html(precoTotalView.toFixed(2).toString().replace(".", ","))
         },
         error: function () {
             alert("Deu erro ao salvar.")
         }
+    }).done(function (){
+        $(".preco-view").each( function () {
+            let html = parseFloat($(this).html()).toFixed(2)
+            html = html.toString().replace(".", ",")
+            
+            $(this).html(html)
+        })
     })
     $('#modal_vendas_view').modal("show")
 }
@@ -138,7 +153,6 @@ function valorFinal() {
     valorFinal = valorFinal.toFixed(2).toString().replace(".", ",")
    
     $("#valor-final").html(valorFinal)
-   
 }
 
 $(function () {
@@ -170,13 +184,22 @@ function comprar() {
         quantidade[index] = parseInt($(qtd).html())
     })
 
+    let precoVenda = []
+
+    $(".preco-produto").each(function (index, preco) {
+        precoVenda[index] = parseFloat($(preco).val())
+    })
+
+    // console.log(quantidade); return
+
     const url = 'backend/venda/salvarController.php'
 
     let data = {
         id_tipo_pag: $("input[name=id_tipo_pag]:checked").val(),
         id_vendedor: $("#id-vendedor").val(),
         quantidade: quantidade,
-        produtos: produtos
+        produtos: produtos,
+        precoVenda: precoVenda
     }
 
     // console.log(data); return

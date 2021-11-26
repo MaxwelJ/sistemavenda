@@ -182,8 +182,9 @@ function abrirModalView(id) {
         error: function () {
             alert("Deu erro ao salvar.")
         }
+    }).done(function (){
+        $("#preco-view").mask('#.##0,00', { reverse: true })
     })
-    $('#preco-view').mask('#.##0,00', { reverse: true });
     $('#modal_produtos_view').modal("show")
 }
 

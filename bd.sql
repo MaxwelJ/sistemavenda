@@ -99,6 +99,8 @@ create table itens_venda (
 	constraint fk_id_produto foreign key (id_produto) references produtos(id)
 );
 
+alter table itens_venda add column valor_venda numeric NOT NULL default 0
+
 select * from itens_venda;
 
 SELECT
