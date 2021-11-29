@@ -37,7 +37,7 @@ function abrirModalView(id) {
                         <td>${produto.quantidade}</td>
                     </tr>`
 
-                    precoTotalView += parseFloat(produto.valorvenda)
+                    precoTotalView += parseFloat(produto.valorvenda * produto.quantidade)
             })
 
             $("#produtos-view").append(html)
