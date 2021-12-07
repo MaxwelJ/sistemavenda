@@ -20,12 +20,44 @@ $vendas = $vendasModel->listar();
     <script src="../../js/index.js"></script>
     <script src="../../js/venda.js"></script>
     <link href="../../css/index.css" rel="stylesheet">
+    <link rel="shortcut icon" type="imagex/png" href="../../img/icon/icone.ico">
     <title>Loja Variedas</title>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-light menu">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light menu">
+        <div class="container-fluid">
+            <a class="navbar-brand" style="margin-left: 10px;" href="../../index.php">
+                <h4><strong>Loja variedades</strong></h4>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../../index.php">Página Inicial</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Cadastros
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="../vendedor/vendedor.php">Vendedores</a></li>
+                            <li><a class="dropdown-item" href="../produtos/produtos.php">Produtos</a></li>
+                            <li><a class="dropdown-item" href="vendas.php">Vendas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-dark me-2 mt-1 mx-2" type="button" onclick="abrirModalCheckout()"><i class="fa fa-shopping-cart"></i> Ver carrinho <span class="rounded bg-danger text-white px-2 mx-auto my-auto" id="cont"></span></button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- <nav class="navbar navbar-light menu">
         <a class="navbar-brand" style="margin-left: 10px;"><strong>Loja variedades</strong></a>
         <ul class="nav justify-content-end">
             <li class="nav-item">
@@ -41,7 +73,7 @@ $vendas = $vendasModel->listar();
                 <a class="nav-link itens-nav" href="vendas.php">Vendas</a>
             </li>
         </ul>
-    </nav>
+    </nav> -->
 
     <div class="container conteudo">
         <div class="table-reponsive w-100">

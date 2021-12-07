@@ -30,6 +30,7 @@ require_once 'vendor/autoload.php';
 
 $tipopagsModel = new \App\Model\TipoPag();
 $tipopags = $tipopagsModel->listar();
+
 ?>
 
 <!-- Controller do vendedor  -->
@@ -56,12 +57,54 @@ $vendedores = $vendedoresModel->listar();
     <script src="js/vendedor.js"></script>
     <script src="js/venda.js"></script>
     <link href="css/index.css" rel="stylesheet">
+    <link rel="shortcut icon" type="imagex/png" href="./img/icon/icone.ico">
     <title>Loja Variedas</title>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-light shadow-lg menu">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light menu">
+        <div class="container-fluid">
+            <a class="navbar-brand" style="margin-left: 10px;" href="index.php">
+                <h4><strong>Loja variedades</strong></h4>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.php">Página Inicial</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Cadastros
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="view/vendedor/vendedor.php">Vendedores</a></li>
+                            <li><a class="dropdown-item" href="view/produtos/produtos.php">Produtos</a></li>
+                            <li><a class="dropdown-item" href="view/vendas/vendas.php">Vendas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Categorias
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#sapatos">Sapatos</a></li>
+                            <li><a class="dropdown-item" href="#roupas">Roupas</a></li>
+                            <li><a class="dropdown-item" href="#acessorios">Acessórios</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-dark me-2 mt-1 mx-2" type="button" onclick="abrirModalCheckout()"><i class="fa fa-shopping-cart"></i> Ver carrinho <span class="rounded bg-danger text-white px-2 mx-auto my-auto" id="cont"></span></button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- <nav class="navbar navbar-light shadow-lg menu">
         <a class="navbar-brand" style="margin-left: 10px;">
             <h4><strong>Loja variedades</strong></h4>
         </a>
@@ -82,7 +125,7 @@ $vendedores = $vendedoresModel->listar();
                 <button class="btn btn-outline-dark me-2 mt-1" type="button" onclick="abrirModalCheckout()"><i class="fa fa-shopping-cart"></i> Ver carrinho <span class="rounded bg-danger text-white px-2 mx-auto my-auto" id="cont"></span></button>
             </li>
         </ul>
-    </nav>
+    </nav> -->
 
     <div class="container-fluid conteudo">
         <div class="row">
@@ -114,19 +157,10 @@ $vendedores = $vendedoresModel->listar();
 
     <div class="container">
         <div class="row">
-            <div class="col-3" style="margin-top: 20px;">
-                <h2>Menu</h2>
-                <ul>
-                    <li>Sapatos</li>
-                    <li>Roupas</li>
-                    <li>Acessórios</li>
-                </ul>
-            </div>
-
-            <div class="col-9">
+            <div class="col-12">
                 <br>
                 <hr>
-                <h2 style="margin-left: 20px;">SAPATOS</h2>
+                <h2 style="margin-left: 20px;">SAPATOS <a name="sapatos"></a></h2>
                 <br>
 
                 <div class="cards" id="card-sapato">
@@ -139,7 +173,7 @@ $vendedores = $vendedoresModel->listar();
                                         <h5 class="card-title"> <?= $sapato['nome'] ?> </h5>
                                         <p class="card-text">R$ <span class="preco"><?= $sapato['preco'] ?></span> </p>
                                         <div class="botaoCarrinho">
-                                            <button type="button" class="btn btn-outline-dark" onClick="adicionarCarrinho(<?= $sapato['id'] ?>)"><i class="fa fa-plus"></i> Adicionar ao carrinho</button>
+                                            <button type="button" class="btn btn-outline-dark" onClick="adicionarCarrinho(<?= $sapato['id'] ?>)"><i class="fa fa-cart-plus"></i> Adicionar ao carrinho</button>
                                         </div>
                                     </div>
                                 </div>
@@ -150,7 +184,7 @@ $vendedores = $vendedoresModel->listar();
 
                 <br>
                 <hr>
-                <h2 style="margin-left: 20px;">ROUPAS</h2>
+                <h2 style="margin-left: 20px;">ROUPAS <a name="roupas"></a></h2>
                 <br>
 
                 <div class="cards" id="card-roupa">
@@ -162,7 +196,7 @@ $vendedores = $vendedoresModel->listar();
                                     <div class="card-body">
                                         <h5 class="card-title"> <?= $roupa['nome'] ?> </h5>
                                         <p class="card-text">R$ <span class="preco"><?= $roupa['preco'] ?></span> </p>
-                                        <button type="submit" class="btn btn-outline-dark botaoCarrinho" onClick="adicionarCarrinho(<?= $roupa['id'] ?>)"><i class="fa fa-plus"></i> Adicionar ao carrinho</button>
+                                        <button type="submit" class="btn btn-outline-dark botaoCarrinho" onClick="adicionarCarrinho(<?= $roupa['id'] ?>)"><i class="fa fa-cart-plus"></i> Adicionar ao carrinho</button>
                                     </div>
                                 </div>
                             </div>
@@ -172,7 +206,7 @@ $vendedores = $vendedoresModel->listar();
 
                 <br>
                 <hr>
-                <h2 style="margin-left: 20px;">ACESSÓRIOS</h2>
+                <h2 style="margin-left: 20px;">ACESSÓRIOS <a name="acessorios"></a></h2>
                 <br>
 
                 <div class="cards" id="card-acessorio">
@@ -184,7 +218,7 @@ $vendedores = $vendedoresModel->listar();
                                     <div class="card-body">
                                         <h5 class="card-title"> <?= $acessorio['nome'] ?> </h5>
                                         <p class="card-text">R$ <span class="preco"><?= $acessorio['preco'] ?></span> </p>
-                                        <button type="submit" class="btn btn-outline-dark botaoCarrinho" onClick="adicionarCarrinho(<?= $acessorio['id'] ?>)"><i class="fa fa-plus"></i> Adicionar ao carrinho</button>
+                                        <button type="submit" class="btn btn-outline-dark botaoCarrinho" onClick="adicionarCarrinho(<?= $acessorio['id'] ?>)"><i class="fa fa-cart-plus"></i> Adicionar ao carrinho</button>
                                     </div>
                                 </div>
                             </div>
@@ -235,7 +269,7 @@ $vendedores = $vendedoresModel->listar();
 
                     <div class="modal-footer">
                         <!-- <button type="submit" class="btn btn-outline-primary"><i class="fa fa-shopping-cart"></i> Comprar</button> -->
-                        <button id="adicionar-carrinho-modal" type="button" class="btn btn-outline-dark"><i class="fa fa-plus"></i> Adicionar ao carrinho</button>
+                        <button id="adicionar-carrinho-modal" type="button" class="btn btn-outline-dark"><i class="fa fa-card-plus"></i> Adicionar ao carrinho</button>
                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal" onClick="$('#modal_detalhes').modal('hide')"><i class="fa fa-close"></i> Fechar</button>
                     </div>
                 </div>
