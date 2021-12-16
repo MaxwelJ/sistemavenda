@@ -34,7 +34,7 @@ async function abrirModalEdit(id) {
         success: function (data) {
             $("#id-edit").val(data.id)
             $("#nome-edit").val(data.nome)
-            $("#preco-edit").val(data.preco)
+            $("#preco-edit").val(data.preco.includes(".") ? data.preco : data.preco + ",00")
             $("#quantidade-edit").val(data.quantidade)
             $("#categoria-edit").val(data.id_categoria)
             $("#imagem-preview-edit").prop('src', '../../' + data.imagem)
@@ -43,9 +43,10 @@ async function abrirModalEdit(id) {
         error: function () {
             alert("Deu erro ao salvar.")
         }
+    }).done(function (){
+        $('#preco-edit').mask('#.##0,00', { reverse: true });
     })
 
-    $('#preco-edit').mask('#.##0,00', { reverse: true });
     $('#modal_produtos_edit').modal("show")
 }
 
@@ -170,10 +171,10 @@ function abrirModalView(id) {
             id: id
         },
         success: function (data) {
-            console.log(data);
+            // console.log(data);
             $("#id-view").val(data.id)
             $("#nome-view").val(data.nome)
-            $("#preco-view").val(data.preco)
+            $("#preco-view").val(data.preco.includes(".") ? data.preco : data.preco + ",00")
             $("#quantidade-view").val(data.quantidade)
             $("#categoria-view").val(data.nome_cat)
             $("#imagem-preview-view").prop('src', '../../' + data.imagem)
@@ -182,9 +183,10 @@ function abrirModalView(id) {
         error: function () {
             alert("Deu erro ao salvar.")
         }
-    }).done(function (){
+    }).done(function () {
         $("#preco-view").mask('#.##0,00', { reverse: true })
     })
+
     $('#modal_produtos_view').modal("show")
 }
 

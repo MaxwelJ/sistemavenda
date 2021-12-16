@@ -11,13 +11,13 @@ class ItensVenda
 
         $sql = 
         "SELECT 
-            iv.id as codItem,
-            p.id as codProduto,
-            p.nome as nomeProduto,
-            p.preco as precoProduto,
-            c.nome as nomeCategoria,
+            iv.id as cod_item,
+            p.id as cod_produto,
+            p.nome as nome_produto,
+            p.preco as preco_produto,
+            c.nome as nome_categoria,
             iv.quantidade as quantidade,
-            iv.valor_venda as valorVenda
+            iv.valor_venda as valor_venda
         FROM itens_venda iv
         INNER JOIN produtos p ON iv.id_produto = p.id
         INNER JOIN categoria c ON p.id_categoria = c.id

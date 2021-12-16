@@ -1,5 +1,4 @@
 function abrirModalEdit(id) {
-    $("#cpf-edit").mask("000.000.000-00")
     $("#nome-edit").val('')
     $("#cpf-edit").val('')
     $("#data-nasc-edit").val('')
@@ -12,15 +11,17 @@ function abrirModalEdit(id) {
             id: id
         },
         success: function (data) {
-            console.log(data);
+            // console.log(data); 
             $("#id-edit").val(data.id)
             $("#nome-edit").val(data.nome)
-            $("#cpf-edit").val(data.cpf)
+            $("#cpf-edit").val(data.cpf).mask('000.000.000-00')
             $("#data-nasc-edit").val(data.data_nasc)
         },
         error: function () {
             alert("Deu erro ao salvar.")
         }
+    }).done(function () {
+        $("#cpf-edit").mask('000.000.000-00')
     })
     $('#modal_vendedor_edit').modal("show")
 }
@@ -85,17 +86,19 @@ function abrirModalView(id) {
             id: id
         },
         success: function (data) {
-            console.log(data);
+            // console.log(data);
             $("#id-view").val(data.id)
             $("#nome-view").val(data.nome)
-            $("#cpf-view").val(data.cpf)
+            $("#cpf-view").val(data.cpf).mask("000.000.000-00")
             $("#data-nasc-view").val(data.data_nasc)
         },
         error: function () {
             alert("Deu erro ao salvar.")
         }
+    }).done(function () {
+        $("#cpf-view").mask("000.000.000-00")
     })
-    $("#cpf-view").mask("000.000.000-00")
+   
     $('#modal_vendedor_view').modal("show")
 }
 

@@ -8,10 +8,15 @@
     background-color: white;
 }
 
-.conteudo {
+.conteudoCarouselImg {
     margin-top: 85px;
     display: flex;
     width: 100%;
+}
+
+.conteudoCarouselProd {
+    display: flex;
+    width: 80%;
 }
 
 .itens-nav {
@@ -21,4 +26,8 @@
 .img-compra{
     width: 70px;
     height: 70px;
+}
+
+.buttonControl{
+    width: 40px;
 }

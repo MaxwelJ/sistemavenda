@@ -44,14 +44,13 @@ $vendedores = $vendedorModel->listar();
                             Cadastros
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="vendedor.php">Vendedores</a></li>
                             <li><a class="dropdown-item" href="../produtos/produtos.php">Produtos</a></li>
-                            <li><a class="dropdown-item" href="../vendas/vendas.php">Vendas</a></li>
+                            <li><a class="dropdown-item" href="../vendas/vendas.php"> Ver vendas</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <button class="btn btn-outline-dark me-2 mt-1 mx-2" type="button" onclick="abrirModalCheckout()"><i class="fa fa-shopping-cart"></i> Ver carrinho <span class="rounded bg-danger text-white px-2 mx-auto my-auto" id="cont"></span></button>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>

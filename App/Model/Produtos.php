@@ -87,9 +87,9 @@ class Produtos
                 VALUES
                 (
                     '{$dados['nome']}', 
-                    '{$dados['preco']}', 
-                    '{$dados['quantidade']}', 
-                    '{$dados['id_categoria']}', 
+                    {$dados['preco']}, 
+                    {$dados['quantidade']}, 
+                    {$dados['id_categoria']}, 
                     '{$dados['imagem']}', 
                     '{$dados['descricao']}'
                 )

@@ -25,19 +25,19 @@ function abrirModalView(id) {
             $("#preco-total-view").html('')
             let precoTotalView = 0
 
-            // console.log(data.itens_venda);
+            console.log(data.itens_venda);
             $(data.itens_venda).each(function (index, produto) {
                 html +=
                     `<tr>
-                        <td>${produto.coditem}</td>
-                        <td>${produto.codproduto}</td>
-                        <td>${produto.nomeproduto}</td>
-                        <td>R$ <span class="preco-view">${produto.valorvenda}</span></td>
-                        <td>${produto.nomecategoria}</td>
+                        <td>${produto.cod_item}</td>
+                        <td>${produto.cod_produto}</td>
+                        <td>${produto.nome_produto}</td>
+                        <td>R$ <span class="preco-view">${produto.valor_venda}</span></td>
+                        <td>${produto.nome_categoria}</td>
                         <td>${produto.quantidade}</td>
                     </tr>`
 
-                    precoTotalView += parseFloat(produto.valorvenda * produto.quantidade)
+                    precoTotalView += parseFloat(produto.valor_venda * produto.quantidade)
             })
 
             $("#produtos-view").append(html)

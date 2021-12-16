@@ -7,7 +7,9 @@ $(document).ready(function () {
 
         $(data).html(newData)
     });
-    $(".preco").mask('#.##0,00', { reverse: true })
+    
+    $('.preco').mask('#.##0,00', {reverse: true});   
+
     $(".data-dismiss").each(function () {
         $(this).modal('hide')
     })
@@ -40,7 +42,7 @@ function abrirModalDetalhes(id) {
             console.log(data);
             $("#id-detalhes").val(data.id)
             $("#nome-detalhes").html(data.nome)
-            $("#preco-detalhes").html(data.preco)
+            $("#preco-detalhes").html(data.preco.includes(".") ? data.preco : data.preco + ",00")
             $("#quantidade-detalhes").html(data.quantidade)
             $("#categoria-detalhes").html(data.nome_cat)
             $("#imagem-preview-detalhes").prop('src', data.imagem)
@@ -118,7 +120,7 @@ function abrirModalCheckout() {
                         </div>
                         <div class="col-md-5 my-auto">
                             <h6>${produto.nome}</h6>
-                            <span class="preco-carrinho">R$ ${produto.preco}</span>
+                            <span class="preco-carrinho">R$ ${produto.preco.includes(".") ? produto.preco : produto.preco + ",00"}</span>
                         </div>
                         <div class="col-md-5 div-qtd my-auto">
                             <input type="hidden" class="id-produto" value="${produto.id}" />

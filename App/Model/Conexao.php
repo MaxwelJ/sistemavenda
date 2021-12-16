@@ -28,10 +28,10 @@ private static $instance;
 
     public static function getConn() {
         $host = "localhost";
-        $user = "postgres";
-        $password = "123";
+        $user = "root";
+        $password = "";
         $db = "sistemavenda";
-        $dsn = "pgsql:host=$host;port=5432;dbname=$db;";
+        $dsn = "mysql:host=$host;dbname=$db;";
 
         if(!isset(self::$instance)){
             self::$instance = new \PDO(

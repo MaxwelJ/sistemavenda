@@ -35,7 +35,7 @@ class Vendedor
 
     public function salvar($dados)
     {
-        // var_dump($dados);
+        // var_dump($dados); die;
         // editar
         if (isset($dados['id']) && !empty($dados['id'])) {
             $sql = 
@@ -51,7 +51,7 @@ class Vendedor
         else {
             $sql = 
             "INSERT INTO vendedor (nome, cpf, data_nasc)
-                VALUES ('{$dados['nome']}', '{$dados['cpf']}', '{$dados['data_nasc']}')
+                VALUES ('{$dados['nome']}', {$dados['cpf']}, '{$dados['data_nasc']}')
             ";
         }
 
