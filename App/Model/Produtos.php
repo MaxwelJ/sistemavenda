@@ -29,6 +29,29 @@ class Produtos
         }
     }
 
+    public function getProdutosByCategoria($id_categoria)
+    {
+        $sql =
+            "SELECT
+                p.*, 
+                c.nome as nome_cat
+            FROM produtos p
+            INNER JOIN categoria c ON p.id_categoria = c.id 
+            WHERE p.id_categoria={$id_categoria}
+            order by id ASC
+        ";
+
+        $stmt = Conexao::getConn()->prepare($sql);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            $resultado = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            return $resultado;
+        } else {
+            return [];
+        }
+    }
+
     public function listar()
     {
         $sql =

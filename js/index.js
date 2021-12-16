@@ -186,7 +186,9 @@ $(document).on('click', ".control-next", function (event) {
         `
         
         $(this).closest(".carrosel-produto").children(".control-prev").html(html)
-    } else if (roupas.includes("VESTIMENTAS")) {
+    } 
+    
+    if (roupas.includes("VESTIMENTAS")) {
         html = 
         `
         <button class="carousel-control-prev buttonControl" type="button" data-bs-target="#carouselRoupas" data-bs-slide="prev">
@@ -196,7 +198,9 @@ $(document).on('click', ".control-next", function (event) {
         `
         
         $(this).closest(".carrosel-produto").children(".control-prev").html(html)
-    } else if (acessorios.includes("ACESSÓRIOS")) {
+    }
+    
+    if (acessorios.includes("ACESSÓRIOS")) {
         html = 
         `
         <button class="carousel-control-prev buttonControl" type="button" data-bs-target="#carouselAcessorios" data-bs-slide="prev">
@@ -204,14 +208,14 @@ $(document).on('click', ".control-next", function (event) {
             <span class="visually-hidden">Previous</span>
         </button>
         `
-        
+         
         $(this).closest(".carrosel-produto").children(".control-prev").html(html)
     }
 })
 
 function verTodos(id) {
     // console.log(id)
-
-    $()
+    
+    window.location.href = 'view/categoria/categoria.php?id='+id
     
 }
