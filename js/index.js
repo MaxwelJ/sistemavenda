@@ -168,3 +168,50 @@ function contCarrinho() {
     // console.log(cont)
 }
 
+$(document).on('click', ".control-next", function (event) {
+    event.preventDefault();
+
+    let sapatos = $("#calcados").html()
+    let roupas = $("#roupas").html()
+    let acessorios = $("#acessorios").html()
+    let html = ''
+
+    if(sapatos.includes("CALÇADOS")){
+        html = 
+        `
+        <button class="carousel-control-prev buttonControl" type="button" data-bs-target="#carouselCalcados" data-bs-slide="prev">
+            <span class="justify-content-left carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        `
+        
+        $(this).closest(".carrosel-produto").children(".control-prev").html(html)
+    } else if (roupas.includes("VESTIMENTAS")) {
+        html = 
+        `
+        <button class="carousel-control-prev buttonControl" type="button" data-bs-target="#carouselRoupas" data-bs-slide="prev">
+            <span class="justify-content-left carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        `
+        
+        $(this).closest(".carrosel-produto").children(".control-prev").html(html)
+    } else if (acessorios.includes("ACESSÓRIOS")) {
+        html = 
+        `
+        <button class="carousel-control-prev buttonControl" type="button" data-bs-target="#carouselAcessorios" data-bs-slide="prev">
+            <span class="justify-content-left carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        `
+        
+        $(this).closest(".carrosel-produto").children(".control-prev").html(html)
+    }
+})
+
+function verTodos(id) {
+    // console.log(id)
+
+    $()
+    
+}
