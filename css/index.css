@@ -14,6 +14,12 @@
     width: 100%;
 }
 
+.conteudoVerTodos {
+    margin-top: 80px;
+    display: flex;
+    width: 80%;
+}
+
 .conteudoCarouselProd {
     display: flex;
     width: 80%;
