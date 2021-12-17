@@ -6,6 +6,8 @@ require_once '../../vendor/autoload.php';
 
 $produtosModel = new \App\Model\Produtos();
 $produtos = $produtosModel->getProdutosByCategoria($_GET['id']);
+
+// var_dump($produtos);die;
 ?>
 
 <html lang="en">
@@ -32,7 +34,7 @@ $produtos = $produtosModel->getProdutosByCategoria($_GET['id']);
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light menu">
         <div class="container-fluid">
-            <a class="navbar-brand" style="margin-left: 10px;" href="index.php">
+            <a class="navbar-brand" style="margin-left: 10px;" href="../../index.php">
                 <h4><strong>Loja variedades</strong></h4>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,112 +63,36 @@ $produtos = $produtosModel->getProdutosByCategoria($_GET['id']);
         </div>
     </nav>
 
-    <div class="container-fluid conteudoCarouselProd">
-        <div class="col-md-12">
-            <!-- CALÇADOS -->
-            <?php
-            if (count($sapatos) > 0) :
-            ?>
-                <div class="row">
-                    <div class="col-12 py-4 px-0 mx-0">
-                        <hr>
-                        <div class="row">
-                            <div class="col-11">
-                                <h2 id="calcados" style="margin-left: 20px;">CALÇADOS<a name="sapatos"></a></h2>
-                            </div>
-                            <div class="col-1">
-                                <button type="button" class="btn btn-sm btn-outline-dark" onclick="verTodos( <?= $sapatos[0]['id_categoria'] ?> )">Ver todos</button>
-                            </div>
+    <div class="container-fluid conteudoVerTodos">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-12 py-4 px-0 mx-0">
+                    <div class="row">
+                        <div class="col-11">
+                            <h1 style="margin-left: 20px; text-align: center;"><?= $produtos[0]['nome_cat'] ?></h1>
                         </div>
-
-                        <div class="container mt-2 mx-auto px-0">
-                            <div id="carouselCalcados" class="carousel carousel-dark" data-interval="false">
-                                <div class="row carrosel-produto">
-                                    <div class="col-md-1 mx-0 px-1 control-prev">
-
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
+                        <?php foreach ($produtos as $produto) : ?>
+                            <div class="col-md-4" id="sapato">
+                                <div class="card h-100">
+                                    <img src="<?= '../../' . $produto['imagem'] ?>" class="card-img-top" alt="..." onClick="abrirModalDetalhes(<?= $produto['id'] ?>)">
+                                    <div class="card-body">
+                                        <h5 class="card-title"> <?= $produto['nome'] ?> </h5>
+                                        <p class="card-text">R$ <span class="preco"><?= mb_strpos($produto['preco'], ".") ? $produto['preco'] : $produto['preco'] . ",00" ?></span> </p>
                                     </div>
-                                    <div class="col-md-10 mx-0 px-0">
-                                        <div class="carousel-inner">
-                                            <?php
-                                            $i = 0;
-                                            $counter = 0;
-                                            while ($i < count($sapatos)) :
-                                            ?>
-                                                <div class="carousel-item <?php if ($counter == 0) echo 'active'; ?>">
-                                                    <div class="row">
-                                                        <div class="col-md-4" id="sapato">
-                                                            <div class="card h-100">
-                                                                <img src="<?= $sapatos[$i]['imagem'] ?>" class="card-img-top" alt="..." onClick="abrirModalDetalhes(<?= $sapatos[$i]['id'] ?>)">
-                                                                <div class="card-body">
-                                                                    <h5 class="card-title"> <?= $sapatos[$i]['nome'] ?> </h5>
-                                                                    <p class="card-text">R$ <span class="preco"><?= mb_strpos($sapatos[$i]['preco'], ".") ? $sapatos[$i]['preco'] : $sapatos[$i]['preco'] . ",00" ?></span> </p>
-                                                                </div>
-                                                                <div class="card-footer bg-white">
-                                                                    <div class="d-grid gap-2 col-10 mx-auto">
-                                                                        <button type="submit" class="btn btn-outline-dark botaoCarrinho" onClick="adicionarCarrinho(<?= $sapatos[$i]['id'] ?>)"><i class="fa fa-cart-plus"></i> Adicionar ao carrinho</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <?php if (isset($sapatos[$i + 1])) : ?>
-                                                            <div class="col-md-4">
-                                                                <div class="card h-100">
-                                                                    <img src="<?= $sapatos[$i + 1]['imagem'] ?>" class="card-img-top" alt="..." onClick="abrirModalDetalhes(<?= $sapatos[$i + 1]['id'] ?>)">
-                                                                    <div class="card-body">
-                                                                        <h5 class="card-title"> <?= $sapatos[$i + 1]['nome'] ?> </h5>
-                                                                        <p class="card-text">R$ <span class="preco"><?= mb_strpos($sapatos[$i + 1]['preco'], ".") ? $sapatos[$i + 1]['preco'] : $sapatos[$i + 1]['preco'] . ",00" ?></span> </p>
-                                                                    </div>
-                                                                    <div class="card-footer bg-white">
-                                                                        <div class="d-grid gap-2 col-10 mx-auto">
-                                                                            <button type="submit" class="btn btn-outline-dark botaoCarrinho" onClick="adicionarCarrinho(<?= $sapatos[$i + 1]['id'] ?>)"><i class="fa fa-cart-plus"></i> Adicionar ao carrinho</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        <?php endif; ?>
-                                                        <?php if (isset($sapatos[$i + 2])) : ?>
-                                                            <div class="col-md-4">
-                                                                <div class="card h-100">
-                                                                    <img src="<?= $sapatos[$i + 2]['imagem'] ?>" class="card-img-top" alt="..." onClick="abrirModalDetalhes(<?= $sapatos[$i + 2]['id'] ?>)">
-                                                                    <div class="card-body">
-                                                                        <h5 class="card-title"> <?= $sapatos[$i + 2]['nome'] ?> </h5>
-                                                                        <p class="card-text">R$ <span class="preco"><?= mb_strpos($sapatos[$i + 2]['preco'], ".") ? $sapatos[$i + 2]['preco'] : $sapatos[$i + 2]['preco'] . ",00" ?></span> </p>
-                                                                    </div>
-                                                                    <div class="card-footer bg-white">
-                                                                        <div class="d-grid gap-2 col-10 mx-auto">
-                                                                            <button type="submit" class="btn btn-outline-dark botaoCarrinho" onClick="adicionarCarrinho(<?= $sapatos[$i + 2]['id'] ?>)"><i class="fa fa-cart-plus"></i> Adicionar ao carrinho</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        <?php endif; ?>
-                                                    </div>
-                                                </div>
-                                            <?php
-                                                $i += 3;
-                                                $counter++;
-                                            endwhile;
-                                            ?>
+                                    <div class="card-footer bg-white">
+                                        <div class="d-grid gap-2 col-10 mx-auto">
+                                            <button type="submit" class="btn btn-outline-dark botaoCarrinho" onClick="adicionarCarrinho(<?= $produto['id'] ?>)"><i class="fa fa-cart-plus"></i> Adicionar ao carrinho</button>
                                         </div>
-                                    </div>
-                                    <div class="col-md-1 mx-0 px-1">
-                                        <?php
-                                        if ($i > 2) :
-                                        ?>
-                                            <button class="carousel-control-next buttonControl control-next" type="button" data-bs-target="#carouselCalcados" data-bs-slide="next">
-                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                <span class="visually-hidden">Next</span>
-                                            </button>
-                                        <?php
-                                        endif;
-                                        ?>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
-            <?php endif; ?>
+            </div>
+        </div>
 
 </body>
 
